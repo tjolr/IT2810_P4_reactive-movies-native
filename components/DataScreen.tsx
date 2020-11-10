@@ -5,7 +5,7 @@ import {StyleSheet, Text, View} from 'react-native';
 const DataScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>DataScreen!</Text>
+      <Text>DataScreen 2</Text>
       <StatusBar style="auto" />
     </View>
   );
