@@ -8,6 +8,10 @@ import HomeScreen from './components/HomeScreen/HomeScreen';
 import DataScreen from './components/DataScreen/DataScreen';
 import {ThemeProvider} from 'react-native-elements';
 import DetailsScreen from './components/DetailsScreen/DetailsScreen';
+import {Provider} from 'react-redux';
+import store from './redux/store';
+import {ApolloProvider} from '@apollo/client';
+import {client} from './GraphQL/ApolloClient';
 
 const Stack = createStackNavigator();
 
@@ -34,19 +38,23 @@ const theme = {
 const App = () => {
   StatusBar.setBarStyle('dark-content', true);
   return (
-    <ThemeProvider theme={theme} useDark={true}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Movies" component={DataScreen} />
-          <Stack.Screen 
-            name="Detail"
-            component={DetailsScreen}
-            options={{title: 'Details'}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme} useDark={true}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Movies" component={DataScreen} />
+              <Stack.Screen
+                name="Detail"
+                component={DetailsScreen}
+                options={{title: 'Details'}}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </ThemeProvider>
+      </Provider>
+    </ApolloProvider>
   );
 };
 

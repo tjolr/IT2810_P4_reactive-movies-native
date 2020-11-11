@@ -5,38 +5,39 @@ import {
   UPDATE_RATING,
   UPDATE_SORT,
 } from './actionTypes';
+import {ISort} from './models/movieReducer.dto';
 
 /* Actions for updating the movie queries */
 
-export const updateSearch = content => ({
+export const updateSearch = (content: string) => ({
   type: UPDATE_SEARCH_FIELD,
   payload: {
     content,
   },
 });
 
-export const changePage = content => ({
+export const changePage = (content: number) => ({
   type: CHANGE_PAGE,
   payload: {
     content,
   },
 });
 
-export const updateReleaseYear = content => ({
+export const updateReleaseYear = (content: number[]) => ({
   type: UPDATE_RELEASE_YEAR,
   payload: {
     content,
   },
 });
 
-export const updateRating = content => ({
+export const updateRating = (content: number[]) => ({
   type: UPDATE_RATING,
   payload: {
     content,
   },
 });
 
-export const updateSort = content => ({
+export const updateSort = (content: any) => ({
   type: UPDATE_SORT,
   /* Setting default sort if no sort is made */
   payload: {

@@ -5,10 +5,11 @@ import {
   UPDATE_RATING,
   UPDATE_SORT,
 } from '../actionTypes';
+import {IMovieState} from '../models/movieReducer.dto';
 
 /* Initial movie state
 Also used in the cypress testing, and therefore it needs to be exported */
-export const initMovieState = {
+export const initMovieState: IMovieState = {
   searchString: '',
   page: 1,
   filter: {
@@ -31,7 +32,7 @@ export const initMovieState = {
 Many times when filters, sorts or search is changed the user wants to 
 see the best results for its search. Therefore many times the page is 
 set to the first page. */
-const movieReducer = (state = initMovieState, action) => {
+const movieReducer = (state = initMovieState, action: any) => {
   switch (action.type) {
     case UPDATE_SEARCH_FIELD:
       return {
