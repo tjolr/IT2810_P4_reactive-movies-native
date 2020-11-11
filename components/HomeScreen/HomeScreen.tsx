@@ -9,8 +9,8 @@ const HomeScreen = ({navigation}: any) => {
       <Text>HomeScreen!</Text>
 
       <Button
-        title="Go to datascreen"
-        onPress={() => navigation.navigate('Profile', {name: 'Jane'})}
+        title="Go to moviescreen"
+        onPress={() => navigation.navigate('Movies')}
       />
       <StatusBar style="auto" />
     </View>

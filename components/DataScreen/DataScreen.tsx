@@ -1,12 +1,11 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useContext, useState} from 'react';
 import {StyleSheet, View, SafeAreaView} from 'react-native';
-import {Text} from 'react-native-elements';
-import SearchField from './Filters/SearchField/SearchField';
+import {Button, Text} from 'react-native-elements';
 import {ThemeContext} from 'react-native-elements';
 import Filters from './Filters/Filters';
 
-const DataScreen = (props: any) => {
+const DataScreen = ({navigation}: any) => {
   const {theme} = useContext(ThemeContext);
   const [showFilter, setShowFilter] = useState(false);
 
@@ -21,6 +20,14 @@ const DataScreen = (props: any) => {
       <View style={styles.mainContainer}>
         <Text>Middle</Text>
       </View>
+      <Button
+        title="Detailscreen 1"
+        onPress={() => navigation.navigate('Detail', {number: '1'})}
+      />
+      <Button
+        title="Detailscreen 2"
+        onPress={() => navigation.navigate('Detail', {number: '2'})}
+      />
       <View style={styles.bottomContainer}>
         <Text>Bottom</Text>
       </View>

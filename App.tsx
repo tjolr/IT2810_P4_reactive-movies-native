@@ -1,13 +1,13 @@
 import 'react-native-gesture-handler';
 import {StatusBar} from 'react-native';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './components/HomeScreen/HomeScreen';
 import DataScreen from './components/DataScreen/DataScreen';
-import {ThemeProvider, colors, Button} from 'react-native-elements';
-import {Platform} from 'react-native';
+import {ThemeProvider} from 'react-native-elements';
+import DetailsScreen from './components/DetailsScreen/DetailsScreen';
 
 const Stack = createStackNavigator();
 
@@ -36,13 +36,14 @@ const App = () => {
   return (
     <ThemeProvider theme={theme} useDark={true}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{title: 'Welcome'}}
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Movies" component={DataScreen} />
+          <Stack.Screen 
+            name="Detail"
+            component={DetailsScreen}
+            options={{title: 'Details'}}
           />
-          <Stack.Screen name="Profile" component={DataScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
