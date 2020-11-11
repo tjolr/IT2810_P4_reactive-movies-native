@@ -1,12 +1,14 @@
 import {StatusBar} from 'expo-status-bar';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, View, SafeAreaView} from 'react-native';
 import {Text} from 'react-native-elements';
-import SearchField from './Filters/SearchField';
+import SearchField from './Filters/SearchField/SearchField';
 import {ThemeContext} from 'react-native-elements';
+import Filters from './Filters/Filters';
 
 const DataScreen = (props: any) => {
   const {theme} = useContext(ThemeContext);
+  const [showFilter, setShowFilter] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -14,7 +16,7 @@ const DataScreen = (props: any) => {
         Movie overview
       </Text>
       <View style={styles.filterContainer}>
-        <SearchField />
+        <Filters />
       </View>
       <View style={styles.mainContainer}>
         <Text>Middle</Text>

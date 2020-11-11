@@ -16,10 +16,7 @@ const SearchField = () => {
       placeholder="Search for a movie"
       onChangeText={updateSearch}
       containerStyle={styles.containerStyle}
-      inputContainerStyle={[
-        styles.inputContainerStyle,
-        {backgroundColor: theme.colors.grey4},
-      ]}
+      inputContainerStyle={[{backgroundColor: theme.colors.grey2}]}
       inputStyle={{
         color: 'white',
       }}
@@ -32,10 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
-  },
-  inputContainerStyle: {
-    backgroundColor: 'lightgrey',
-    color: 'white',
   },
 });
 export default SearchField;
