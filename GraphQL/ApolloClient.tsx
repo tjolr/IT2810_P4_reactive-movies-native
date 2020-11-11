@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import {ApolloClient, HttpLink, InMemoryCache} from '@apollo/client';
 
 export const APP_ID = 'MovieDB';

@@ -4,6 +4,7 @@ import {StyleSheet, View, SafeAreaView} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 import {ThemeContext} from 'react-native-elements';
 import Filters from './Filters/Filters';
+import MovieList from './MovieList/MovieList';
 
 const DataScreen = ({navigation}: any) => {
   const {theme} = useContext(ThemeContext);
@@ -18,7 +19,7 @@ const DataScreen = ({navigation}: any) => {
         <Filters />
       </View>
       <View style={styles.mainContainer}>
-        <Text>Middle</Text>
+        <MovieList />
       </View>
       <Button
         title="Detailscreen 1"
