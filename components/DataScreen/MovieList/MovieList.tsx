@@ -1,7 +1,7 @@
 import React from 'react';
 import {useQuery} from '@apollo/client';
 import {buildMovieQuery} from '../../../GraphQL/QueryBuilder';
-import {useSelector} from 'react-redux';
+import {useSelector, RootStateOrAny} from 'react-redux';
 import {View} from 'react-native';
 import {Text} from 'react-native-elements';
 import MovieListItem from './MovieListItem';
@@ -9,11 +9,17 @@ import {MovieListObject} from '../../../GraphQL/models/movieModels';
 
 const MovieList = () => {
   const searchStringRedux = useSelector(
-    state => state.movieReducer.searchString
+    (state: RootStateOrAny) => state.movieReducer.searchString
   );
-  const pageRedux = useSelector(state => state.movieReducer.page);
-  const filterRedux = useSelector(state => state.movieReducer.filter);
-  const sortRedux = useSelector(state => state.movieReducer.sort);
+  const pageRedux = useSelector(
+    (state: RootStateOrAny) => state.movieReducer.page
+  );
+  const filterRedux = useSelector(
+    (state: RootStateOrAny) => state.movieReducer.filter
+  );
+  const sortRedux = useSelector(
+    (state: RootStateOrAny) => state.movieReducer.sort
+  );
 
   const {loading, error, data} = useQuery(buildMovieQuery(), {
     variables: {
