@@ -6,13 +6,14 @@ import {Button} from 'react-native-elements';
 const HomeScreen = ({navigation}: any) => {
   return (
     <View style={styles.container}>
+      <StatusBar style="dark" animated={true} />
+
       <Text>HomeScreen!</Text>
 
       <Button
         title="Go to moviescreen"
         onPress={() => navigation.navigate('Movies')}
       />
-      <StatusBar style="auto" />
     </View>
   );
 };

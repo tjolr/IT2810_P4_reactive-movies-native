@@ -1,3 +1,4 @@
+import {StatusBar} from 'expo-status-bar';
 import React, {useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text, ThemeContext, ThemeProps} from 'react-native-elements';
@@ -9,6 +10,7 @@ const DetailsScreen = ({route}: any) => {
 
   return (
     <View style={styles(theme).container}>
+      <StatusBar style="light" animated={true} />
       <Text h2>{route.params.movieDetails.title}</Text>
       <Text h4>
         Release year:{' '}

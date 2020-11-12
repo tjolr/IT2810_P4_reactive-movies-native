@@ -1,7 +1,5 @@
 import 'react-native-gesture-handler';
-import {StatusBar} from 'react-native';
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './components/HomeScreen/HomeScreen';
@@ -14,6 +12,7 @@ import {ApolloProvider} from '@apollo/client';
 import {client} from './GraphQL/ApolloClient';
 import {theme} from './theme/theme.model';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {StatusBar} from 'expo-status-bar';
 
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
@@ -21,19 +20,48 @@ EStyleSheet.build({
 const Stack = createStackNavigator();
 
 const App = () => {
-  StatusBar.setBarStyle('dark-content', true);
   return (
     <ApolloProvider client={client}>
       <StoreProvider store={store}>
         <ThemeProvider theme={theme} useDark={true}>
+          <StatusBar style="dark" animated={true} />
+
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
-              <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Movies" component={DataScreen} />
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }}
+              />
+              <Stack.Screen
+                name="Movies"
+                component={DataScreen}
+                options={{
+                  headerStyle: {
+                    backgroundColor: theme.colors.grey3,
+                  },
+                  headerTintColor: '#fff',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }}
+              />
               <Stack.Screen
                 name="Detail"
                 component={DetailsScreen}
-                options={{title: 'Details'}}
+                options={{
+                  headerStyle: {
+                    backgroundColor: theme.colors.grey3,
+                  },
+                  headerTintColor: '#fff',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }}
               />
             </Stack.Navigator>
           </NavigationContainer>

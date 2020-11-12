@@ -13,6 +13,8 @@ const DataScreen = () => {
 
   return (
     <SafeAreaView style={styles(theme).container}>
+      <StatusBar style="light" animated={true} />
+
       <View style={styles(theme).filterContainer}>
         <Filters />
       </View>
@@ -22,7 +24,6 @@ const DataScreen = () => {
       <View style={styles(theme).bottomContainer}>
         <Text>Bottom</Text>
       </View>
-      <StatusBar style="auto" />
     </SafeAreaView>
   );
 };
