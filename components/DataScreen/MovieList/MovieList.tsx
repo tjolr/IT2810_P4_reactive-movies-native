@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useQuery} from '@apollo/client';
 import {buildMovieQuery} from '../../../GraphQL/QueryBuilder';
 import {useSelector, RootStateOrAny} from 'react-redux';
-import {View} from 'react-native';
-import {Text} from 'react-native-elements';
+import {ScrollView, View} from 'react-native';
+import {Text, ThemeContext, ThemeProps} from 'react-native-elements';
 import MovieListItem from './MovieListItem';
-import {MovieListObject} from '../../../GraphQL/models/movieModels';
+import {MovieListObject} from '../../../GraphQL/models/movie.model';
+import {IThemeObject} from '../../../theme/theme.model';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const MovieList = () => {
+  const {theme} = useContext<ThemeProps<any>>(ThemeContext);
   const searchStringRedux = useSelector(
     (state: RootStateOrAny) => state.movieReducer.searchString
   );
@@ -45,18 +48,34 @@ const MovieList = () => {
       </View>
     );
 
-  if (data) {
-    console.log(data);
-  }
-
   return (
-    <View>
+    <ScrollView>
       {data &&
-        data.Movie.movies.map((row: MovieListObject) => (
-          <MovieListItem row={row} key={row.id} />
+        data.Movie.movies.map((row: MovieListObject, index: number) => (
+          <View
+            style={EStyleSheet.child(
+              styles(theme),
+              'movieListItemContainer',
+              index,
+              data.Movie.movies.length
+            )}
+            key={index}
+          >
+            <MovieListItem row={row} />
+          </View>
         ))}
-    </View>
+    </ScrollView>
   );
 };
+
+const styles = (theme: IThemeObject) =>
+  EStyleSheet.create({
+    'movieListItemContainer:nth-child-even': {
+      backgroundColor: theme.colors.grey3,
+    },
+    'movieListItemContainer:nth-child-odd': {
+      backgroundColor: theme.colors.grey1,
+    },
+  });
 
 export default MovieList;

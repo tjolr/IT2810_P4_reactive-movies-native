@@ -1,11 +1,11 @@
 import React, {useState, useContext} from 'react';
 import Modal from 'react-native-modal';
 import {View, StyleSheet} from 'react-native';
-import {Button, Text, ThemeContext} from 'react-native-elements';
+import {Button, Text, ThemeContext, ThemeProps} from 'react-native-elements';
 import {Icon} from 'react-native-elements';
 
 const MovieFilters = () => {
-  const {theme} = useContext<any>(ThemeContext);
+  const {theme} = useContext<ThemeProps<any>>(ThemeContext);
 
   const [showFilters, setShowFilters] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
@@ -21,7 +21,7 @@ const MovieFilters = () => {
         onPress={toggleModal}
         icon={<Icon name="sort" />}
         iconRight={true}
-        containerStyle={{flex: 2.8}}
+        containerStyle={{flex: 2.8, marginRight: 10}}
       />
       <Button
         title="Clear"
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   buttonsViewContainer: {
     display: 'flex',
     flexDirection: 'row',
-    padding: 0,
+    padding: 8,
     margin: 0,
   },
 });

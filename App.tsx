@@ -8,38 +8,23 @@ import HomeScreen from './components/HomeScreen/HomeScreen';
 import DataScreen from './components/DataScreen/DataScreen';
 import {ThemeProvider} from 'react-native-elements';
 import DetailsScreen from './components/DetailsScreen/DetailsScreen';
-import {Provider} from 'react-redux';
+import {Provider as StoreProvider} from 'react-redux';
 import store from './redux/store';
 import {ApolloProvider} from '@apollo/client';
 import {client} from './GraphQL/ApolloClient';
+import {theme} from './theme/theme.model';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
+EStyleSheet.build({
+  // always call EStyleSheet.build() even if you don't use global variables!
+});
 const Stack = createStackNavigator();
-
-const theme = {
-  Button: {
-    containerStyle: {
-      margin: 10,
-    },
-    titleStyle: {
-      padding: 15,
-    },
-  },
-  colors: {
-    secondary: '#ffb732',
-    grey0: '#1b262c',
-    grey1: '#313b41',
-    grey2: '#485156',
-    grey3: '#8d9295',
-    grey4: '#babdbf',
-    grey5: '#d1d3d4',
-  },
-};
 
 const App = () => {
   StatusBar.setBarStyle('dark-content', true);
   return (
     <ApolloProvider client={client}>
-      <Provider store={store}>
+      <StoreProvider store={store}>
         <ThemeProvider theme={theme} useDark={true}>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
@@ -53,18 +38,9 @@ const App = () => {
             </Stack.Navigator>
           </NavigationContainer>
         </ThemeProvider>
-      </Provider>
+      </StoreProvider>
     </ApolloProvider>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

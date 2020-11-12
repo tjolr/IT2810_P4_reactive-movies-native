@@ -1,24 +1,22 @@
 import {StatusBar} from 'expo-status-bar';
-import React, {useContext, useState} from 'react';
-import {StyleSheet, View, SafeAreaView} from 'react-native';
-import {Button, Text} from 'react-native-elements';
+import React, {useContext} from 'react';
+import {View, SafeAreaView} from 'react-native';
+import {Button, Text, ThemeProps} from 'react-native-elements';
 import {ThemeContext} from 'react-native-elements';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {IThemeObject} from '../../theme/theme.model';
 import Filters from './Filters/Filters';
 import MovieList from './MovieList/MovieList';
 
 const DataScreen = ({navigation}: any) => {
-  const {theme} = useContext(ThemeContext);
-  const [showFilter, setShowFilter] = useState(false);
+  const {theme} = useContext<ThemeProps<any>>(ThemeContext);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text h4 style={styles.title}>
-        Movie overview
-      </Text>
-      <View style={styles.filterContainer}>
+    <SafeAreaView style={styles(theme).container}>
+      <View style={styles(theme).filterContainer}>
         <Filters />
       </View>
-      <View style={styles.mainContainer}>
+      <View style={styles(theme).movieListContainer}>
         <MovieList />
       </View>
       <Button
@@ -29,7 +27,7 @@ const DataScreen = ({navigation}: any) => {
         title="Detailscreen 2"
         onPress={() => navigation.navigate('Detail', {number: '2'})}
       />
-      <View style={styles.bottomContainer}>
+      <View style={styles(theme).bottomContainer}>
         <Text>Bottom</Text>
       </View>
       <StatusBar style="auto" />
@@ -37,24 +35,26 @@ const DataScreen = ({navigation}: any) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#323232',
-  },
-  title: {
-    paddingLeft: 10,
-    marginTop: 10,
-  },
-  filterContainer: {
-    position: 'relative',
-    top: 0,
-  },
-  mainContainer: {
-    flex: 1,
-    padding: 10,
-  },
-  bottomContainer: {position: 'relative', bottom: 0, padding: 10},
-});
+const styles = (theme: IThemeObject) =>
+  EStyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      backgroundColor: theme.colors.grey0,
+    },
+    title: {
+      paddingLeft: 10,
+      marginTop: 10,
+    },
+    filterContainer: {
+      position: 'relative',
+      paddingTop: 3,
+      top: 0,
+    },
+    movieListContainer: {
+      flex: 1,
+      padding: 0,
+    },
+    bottomContainer: {position: 'relative', bottom: 0, padding: 10},
+  });
 export default DataScreen;

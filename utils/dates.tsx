@@ -20,3 +20,7 @@ export const getDateInYearString = (date: Date) => {
 
   return `${day} ${month} ${year}`;
 };
+
+export const getFullYearNumber = (date: Date): number => {
+  return new Date(date).getFullYear();
+};

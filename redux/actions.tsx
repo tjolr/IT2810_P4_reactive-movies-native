@@ -5,7 +5,6 @@ import {
   UPDATE_RATING,
   UPDATE_SORT,
 } from './actionTypes';
-import {ISort} from './models/movieReducer.dto';
 
 /* Actions for updating the movie queries */
 

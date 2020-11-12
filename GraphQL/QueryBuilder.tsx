@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
-import {columnDefs} from '../components/DataScreen/MovieList/Columns';
+import {MovieItemFields} from '../components/DataScreen/MovieList/models/movieItem.model';
 
 export const buildMovieQuery = () => {
   const fields: string[] = [];
-  columnDefs.map(columnDef => fields.push(columnDef.field));
+  MovieItemFields.map(movieItem => fields.push(movieItem.field));
 
   const fieldString = fields.join('\n');
 

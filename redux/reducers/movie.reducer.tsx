@@ -5,7 +5,7 @@ import {
   UPDATE_RATING,
   UPDATE_SORT,
 } from '../actionTypes';
-import {IMovieState} from '../models/movieReducer.dto';
+import {IMovieState} from '../models/movieReducer.model';
 
 /* Initial movie state
 Also used in the cypress testing, and therefore it needs to be exported */
