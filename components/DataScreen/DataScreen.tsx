@@ -8,7 +8,7 @@ import {IThemeObject} from '../../theme/theme.model';
 import Filters from './Filters/Filters';
 import MovieList from './MovieList/MovieList';
 
-const DataScreen = ({navigation}: any) => {
+const DataScreen = () => {
   const {theme} = useContext<ThemeProps<any>>(ThemeContext);
 
   return (
@@ -19,14 +19,6 @@ const DataScreen = ({navigation}: any) => {
       <View style={styles(theme).movieListContainer}>
         <MovieList />
       </View>
-      <Button
-        title="Detailscreen 1"
-        onPress={() => navigation.navigate('Detail', {number: '1'})}
-      />
-      <Button
-        title="Detailscreen 2"
-        onPress={() => navigation.navigate('Detail', {number: '2'})}
-      />
       <View style={styles(theme).bottomContainer}>
         <Text>Bottom</Text>
       </View>
