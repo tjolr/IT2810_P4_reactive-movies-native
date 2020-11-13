@@ -2,7 +2,7 @@ import { LabelProps } from '@ptomasroos/react-native-multi-slider';
 import React, { useContext } from 'react';
 import { View, StyleSheet, useWindowDimensions } from 'react-native';
 import { ThemeContext, ThemeProps, Text } from 'react-native-elements';
-import { IThemeObject } from '../../../../theme/theme.model';
+import { IThemeObject } from '../../../../../theme/theme.model';
 
 const width = 40;
 

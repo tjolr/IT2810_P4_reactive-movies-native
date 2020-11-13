@@ -1,10 +1,15 @@
 import React, { useState, useContext } from 'react';
 import Modal from 'react-native-modal';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Button, Text, ThemeContext, ThemeProps } from 'react-native-elements';
+import { Button, ThemeContext, ThemeProps } from 'react-native-elements';
 import { Icon } from 'react-native-elements';
 import { IThemeObject } from '../../../../theme/theme.model';
-import { RatingSlider, ReleaseYearSlider } from './MovieFilterSliders';
+import {
+  RatingSlider,
+  ReleaseYearSlider,
+} from './MovieFilter/MovieFilterSliders';
+import MovieSorting from './MovieSorting/MovieSorting';
+import MovieFilter from './MovieFilter/MovieFilter';
 
 const MovieFilters = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
@@ -50,14 +55,9 @@ const MovieFilters = () => {
         swipeDirection="down"
       >
         <View style={styles(theme).modalContainer}>
-          <Text style={{ color: 'white' }} h4>
-            Filter movies
-          </Text>
           <ScrollView>
-            <Text style={styles(theme).sliderHeaderText}>Rating</Text>
-            <RatingSlider />
-            <Text style={styles(theme).sliderHeaderText}>Release year</Text>
-            <ReleaseYearSlider />
+            <MovieFilter />
+            <MovieSorting />
           </ScrollView>
         </View>
       </Modal>
@@ -70,7 +70,7 @@ const styles = (theme: IThemeObject) =>
     modalContainer: {
       backgroundColor: theme.colors.grey3,
       padding: 15,
-      height: 300,
+      paddingBottom: 20,
       position: 'absolute',
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
@@ -86,10 +86,6 @@ const styles = (theme: IThemeObject) =>
       flexDirection: 'row',
       padding: 8,
       margin: 0,
-    },
-    sliderHeaderText: {
-      alignSelf: 'center',
-      bottom: -10,
     },
   });
 

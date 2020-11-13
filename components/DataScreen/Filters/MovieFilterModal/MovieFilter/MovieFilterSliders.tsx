@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { ThemeContext, ThemeProps } from 'react-native-elements';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { updateRating, updateReleaseYear } from '../../../../redux/actions';
+import { updateRating, updateReleaseYear } from '../../../../../redux/actions';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { CustomLabel } from './SliderLabel';
 import { StyleSheet } from 'react-native';
-import { IThemeObject } from '../../../../theme/theme.model';
+import { IThemeObject } from '../../../../../theme/theme.model';
 
 export const RatingSlider = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);

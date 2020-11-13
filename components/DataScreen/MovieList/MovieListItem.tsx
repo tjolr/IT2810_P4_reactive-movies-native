@@ -1,11 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
-import {Text} from 'react-native-elements';
+import { TouchableOpacity, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {MovieListObject} from '../../../GraphQL/models/movie.model';
-import {getFullYearNumber} from '../../../utils/dates';
-import {Icon} from 'react-native-elements';
-import {useNavigation} from '@react-navigation/native';
+import { MovieListObject } from '../../../GraphQL/models/movie.model';
+import { getFullYearNumber } from '../../../utils/dates';
+import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 interface IMovieListItemProps {
   row: MovieListObject;
@@ -17,21 +17,21 @@ const MovieListItem = (props: IMovieListItemProps) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('Detail', {movieDetails: props.row})}
+      onPress={() => navigation.navigate('Detail', { movieDetails: props.row })}
     >
       <View style={styles.movieInfoContainer}>
         <Text style={styles.title}>
           {props.row.title}
 
-          {props.row.release_date && (
+          {props.row.release_date !== undefined && (
             <Text style={styles.release_date}>
               {' '}
               ({getFullYearNumber(props.row.release_date)})
             </Text>
           )}
         </Text>
-        {props.row.vote_average && (
-          <Text style={{marginTop: 3}}>
+        {props.row.vote_average !== undefined && (
+          <Text style={{ marginTop: 3 }}>
             User rating: {props.row.vote_average}
           </Text>
         )}

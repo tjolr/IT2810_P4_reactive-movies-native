@@ -6,6 +6,7 @@ import {
   UPDATE_SORT,
   SET_SEARCH_IS_LOADING,
 } from './actionTypes';
+import { defaultSort, ISort } from './models/movieReducer.model';
 
 /* Actions for updating the movie queries */
 
@@ -37,12 +38,13 @@ export const updateRating = (content: number[]) => ({
   },
 });
 
-export const updateSort = (content: any) => ({
+export const updateSort = (content: ISort) => ({
   type: UPDATE_SORT,
   /* Setting default sort if no sort is made */
   payload: {
-    field: content ? content.field : 'popularity',
-    sort: content ? content.sort : 'desc',
+    field: content.field !== null ? content.field : defaultSort.field,
+    sort:
+      content.direction !== null ? content.direction : defaultSort.direction,
   },
 });
 

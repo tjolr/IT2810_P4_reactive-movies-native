@@ -18,6 +18,17 @@ export interface IRangeSlider {
 }
 
 export interface ISort {
-  field: string;
-  direction: 'desc' | 'asc';
+  field: string | null;
+  direction: SortDirection;
 }
+
+export type SortDirection = 'asc' | 'desc' | null;
+
+export const defaultSort: ISort = {
+  field: 'popularity',
+  direction: 'desc',
+};
+
+export const sortDirectionList: SortDirection[] = [null, 'asc', 'desc'];
+export const sortDirectionListLength: number = sortDirectionList.length;
+export const defaultSortDirection: SortDirection = sortDirectionList[0];

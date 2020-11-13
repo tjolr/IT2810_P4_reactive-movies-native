@@ -1,11 +1,12 @@
 export interface MovieItemField {
   field: string;
+  hide?: boolean;
 }
 
 export const MovieItemFields: MovieItemField[] = [
-  {field: 'id'},
-  {field: '_id'},
-  {field: 'title'},
-  {field: 'release_date'},
-  {field: 'vote_average'},
+  { field: 'id', hide: true },
+  { field: '_id', hide: true },
+  { field: 'title' },
+  { field: 'release_date' },
+  { field: 'vote_average' },
 ];
