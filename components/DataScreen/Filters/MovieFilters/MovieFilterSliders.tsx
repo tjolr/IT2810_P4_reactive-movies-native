@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { ThemeContext, ThemeProps } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { updateRating, updateReleaseYear } from '../../../../redux/actions';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { CustomLabel } from './SliderLabel';
@@ -9,10 +9,16 @@ import { IThemeObject } from '../../../../theme/theme.model';
 
 export const RatingSlider = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
-
   const dispatch = useDispatch();
 
-  const [ratingFilterValue, setRatingFilterValue] = useState<number[]>([0, 10]);
+  const ratingFilterValuesRedux = useSelector(
+    (state: RootStateOrAny) => state.movieReducer.filter.rating
+  );
+
+  const [ratingFilterValue, setRatingFilterValue] = useState<number[]>([
+    ratingFilterValuesRedux.from,
+    ratingFilterValuesRedux.to,
+  ]);
 
   const ratingFilterValueChange = (values: number[]) => {
     setRatingFilterValue(values);
@@ -47,10 +53,13 @@ export const ReleaseYearSlider = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
 
   const dispatch = useDispatch();
+  const releaseYearFilterValuesRedux = useSelector(
+    (state: RootStateOrAny) => state.movieReducer.filter.release_year
+  );
 
   const [releaseYearFilterValue, setReleaseYearFilterValue] = useState<
     number[]
-  >([1916, 2020]);
+  >([releaseYearFilterValuesRedux.from, releaseYearFilterValuesRedux.to]);
 
   const releaseYearFilterValueChange = (values: number[]) => {
     setReleaseYearFilterValue(values);
@@ -94,5 +103,6 @@ const styles = (theme: IThemeObject) =>
     },
     sliderMarker: {
       backgroundColor: theme.colors.secondary,
+      borderWidth: 0,
     },
   });
