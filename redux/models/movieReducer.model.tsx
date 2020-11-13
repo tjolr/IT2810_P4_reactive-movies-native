@@ -3,6 +3,8 @@ export interface IMovieState {
   page: number;
   filter: IFilter;
   sort: ISort;
+  searchIsLoading: boolean;
+  filterIsLoading: boolean;
 }
 
 export interface IFilter {

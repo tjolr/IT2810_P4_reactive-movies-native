@@ -4,6 +4,7 @@ import {
   UPDATE_RELEASE_YEAR,
   UPDATE_RATING,
   UPDATE_SORT,
+  SET_SEARCH_IS_LOADING,
 } from './actionTypes';
 
 /* Actions for updating the movie queries */
@@ -42,5 +43,12 @@ export const updateSort = (content: any) => ({
   payload: {
     field: content ? content.field : 'popularity',
     sort: content ? content.sort : 'desc',
+  },
+});
+
+export const setSearchIsLoading = (loading: boolean) => ({
+  type: SET_SEARCH_IS_LOADING,
+  payload: {
+    loading,
   },
 });

@@ -4,6 +4,7 @@ import {
   UPDATE_RELEASE_YEAR,
   UPDATE_RATING,
   UPDATE_SORT,
+  SET_SEARCH_IS_LOADING,
 } from '../actionTypes';
 import {IMovieState} from '../models/movieReducer.model';
 
@@ -26,6 +27,8 @@ export const initMovieState: IMovieState = {
     field: 'popularity',
     direction: 'desc',
   },
+  searchIsLoading: false,
+  filterIsLoading: false,
 };
 
 /* Movie Reducer
@@ -39,6 +42,7 @@ const movieReducer = (state = initMovieState, action: any) => {
         ...state,
         searchString: action.payload.content,
         page: 1,
+        searchIsLoading: action.payload.content ? true : false,
       };
     case CHANGE_PAGE:
       return {
@@ -83,6 +87,11 @@ const movieReducer = (state = initMovieState, action: any) => {
           field: action.payload.field,
           direction: action.payload.sort,
         },
+      };
+    case SET_SEARCH_IS_LOADING:
+      return {
+        ...state,
+        searchIsLoading: action.payload.loading,
       };
     default:
       return state;
