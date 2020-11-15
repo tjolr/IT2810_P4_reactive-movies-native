@@ -5,14 +5,20 @@ import {
   UPDATE_RATING,
   UPDATE_SORT,
   SET_SEARCH_IS_LOADING,
+  SET_TOTAL_ROW_COUNT,
 } from '../actionTypes';
-import {IMovieState} from '../models/movieReducer.model';
+import { IMovieState } from '../models/movieReducer.model';
 
 /* Initial movie state
 Also used in the cypress testing, and therefore it needs to be exported */
 export const initMovieState: IMovieState = {
   searchString: '',
-  page: 1,
+  pagination: {
+    page: 1,
+    pageInterval: [1, 25],
+    totalPages: 0,
+    totalRowCount: 0,
+  },
   filter: {
     rating: {
       from: 0,
@@ -28,7 +34,6 @@ export const initMovieState: IMovieState = {
     direction: 'desc',
   },
   searchIsLoading: false,
-  filterIsLoading: false,
 };
 
 /* Movie Reducer
@@ -41,18 +46,20 @@ const movieReducer = (state = initMovieState, action: any) => {
       return {
         ...state,
         searchString: action.payload.content,
-        page: 1,
         searchIsLoading: action.payload.content ? true : false,
       };
     case CHANGE_PAGE:
       return {
         ...state,
-        page: action.payload.content,
+        pagination: {
+          ...state.pagination,
+          page: action.payload.page,
+          pageInterval: action.payload.pageInterval,
+        },
       };
     case UPDATE_RELEASE_YEAR:
       return {
         ...state,
-        page: 1,
         filter: {
           /* Important use of spread operator here
           to also remain the nested childs of the state
@@ -67,7 +74,6 @@ const movieReducer = (state = initMovieState, action: any) => {
     case UPDATE_RATING:
       return {
         ...state,
-        page: 1,
         filter: {
           /* Important use of spread operator here
           to also remain the nested childs of the state
@@ -82,7 +88,6 @@ const movieReducer = (state = initMovieState, action: any) => {
     case UPDATE_SORT:
       return {
         ...state,
-        page: 1,
         sort: {
           field: action.payload.field,
           direction: action.payload.sort,
@@ -92,6 +97,15 @@ const movieReducer = (state = initMovieState, action: any) => {
       return {
         ...state,
         searchIsLoading: action.payload.loading,
+      };
+    case SET_TOTAL_ROW_COUNT:
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          totalRowCount: action.payload.totalRowCount,
+          totalPages: action.payload.totalPages,
+        },
       };
     default:
       return state;

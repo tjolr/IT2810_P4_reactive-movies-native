@@ -1,15 +1,23 @@
 export interface IMovieState {
   searchString: string;
-  page: number;
+  pagination: IPagination;
   filter: IFilter;
   sort: ISort;
   searchIsLoading: boolean;
-  filterIsLoading: boolean;
 }
+
+export const rowsPerPage = 25;
 
 export interface IFilter {
   rating: IRangeSlider;
   release_year: IRangeSlider;
+}
+
+export interface IPagination {
+  page: number;
+  pageInterval: number[];
+  totalRowCount: number;
+  totalPages: number;
 }
 
 export interface IRangeSlider {

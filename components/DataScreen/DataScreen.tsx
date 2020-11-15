@@ -1,15 +1,16 @@
-import {StatusBar} from 'expo-status-bar';
-import React, {useContext} from 'react';
-import {View, SafeAreaView} from 'react-native';
-import {Button, Text, ThemeProps} from 'react-native-elements';
-import {ThemeContext} from 'react-native-elements';
+import { StatusBar } from 'expo-status-bar';
+import React, { useContext } from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { Text, ThemeProps } from 'react-native-elements';
+import { ThemeContext } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {IThemeObject} from '../../theme/theme.model';
+import { IThemeObject } from '../../theme/theme.model';
 import Filters from './Filters/Filters';
 import MovieList from './MovieList/MovieList';
+import Pagination from './Pagination/Pagination';
 
 const DataScreen = () => {
-  const {theme} = useContext<ThemeProps<any>>(ThemeContext);
+  const { theme } = useContext<ThemeProps<any>>(ThemeContext);
 
   return (
     <SafeAreaView style={styles(theme).container}>
@@ -22,7 +23,7 @@ const DataScreen = () => {
         <MovieList />
       </View>
       <View style={styles(theme).bottomContainer}>
-        <Text>Bottom</Text>
+        <Pagination />
       </View>
     </SafeAreaView>
   );
@@ -48,6 +49,6 @@ const styles = (theme: IThemeObject) =>
       flex: 1,
       padding: 0,
     },
-    bottomContainer: {position: 'relative', bottom: 0, padding: 10},
+    bottomContainer: { position: 'relative', bottom: 0 },
   });
 export default DataScreen;

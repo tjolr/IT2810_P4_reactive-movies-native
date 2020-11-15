@@ -1,26 +1,26 @@
-import React, {useContext, useEffect} from 'react';
-import {useQuery} from '@apollo/client';
-import {buildMovieQuery} from '../../../GraphQL/QueryBuilder';
-import {useSelector, RootStateOrAny, useDispatch} from 'react-redux';
-import {ScrollView, View} from 'react-native';
-import {Text, ThemeContext, ThemeProps} from 'react-native-elements';
+import React, { useContext, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { buildMovieQuery } from '../../../GraphQL/QueryBuilder';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { ScrollView, View } from 'react-native';
+import { Text, ThemeContext, ThemeProps } from 'react-native-elements';
 import MovieListItem from './MovieListItem';
-import {MovieListObject} from '../../../GraphQL/models/movie.model';
-import {IThemeObject} from '../../../theme/theme.model';
+import { MovieListObject } from '../../../GraphQL/models/movie.model';
+import { IThemeObject } from '../../../theme/theme.model';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {setSearchIsLoading} from '../../../redux/actions';
+import { setSearchIsLoading, setTotalRowCount } from '../../../redux/actions';
 import LoadingAnimation from '../../Generic/loading';
 
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 const MovieList = () => {
-  const {theme} = useContext<ThemeProps<any>>(ThemeContext);
+  const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   const dispatch = useDispatch();
   const searchStringRedux = useSelector(
     (state: RootStateOrAny) => state.movieReducer.searchString
   );
   const pageRedux = useSelector(
-    (state: RootStateOrAny) => state.movieReducer.page
+    (state: RootStateOrAny) => state.movieReducer.pagination.page
   );
   const filterRedux = useSelector(
     (state: RootStateOrAny) => state.movieReducer.filter
@@ -33,7 +33,7 @@ const MovieList = () => {
     (state: RootStateOrAny) => state.movieReducer.searchIsLoading
   );
 
-  const {loading, error, data} = useQuery(buildMovieQuery(), {
+  const { loading, error, data } = useQuery(buildMovieQuery(), {
     variables: {
       searchString: searchStringRedux !== undefined ? searchStringRedux : '',
       page: pageRedux,
@@ -48,11 +48,12 @@ const MovieList = () => {
       // when data is found :-)
       dispatch(setSearchIsLoading(false));
     }
+    data && dispatch(setTotalRowCount(data.Movie.totalRowCount));
   }, [data]);
 
   if (loading)
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <LoadingAnimation />
       </View>
     );
@@ -93,7 +94,7 @@ const MovieList = () => {
             backgroundColor: theme.colors.error,
           }}
         >
-          <Icon name="warning" containerStyle={{margin: 5}} />
+          <Icon name="warning" containerStyle={{ margin: 5 }} />
           <Text h4> No movies matching your filter</Text>
         </View>
       )}
