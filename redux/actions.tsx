@@ -26,7 +26,8 @@ export const updateSearch = (content: string) => {
 
 export const changePage = (page: number) => {
   // The pageInterval shows which of total rows that are display
-  const pageInterval = [(page - 1) * rowsPerPage + 1, page * rowsPerPage];
+  let pageInterval = [(page - 1) * rowsPerPage + 1, page * rowsPerPage];
+
   return {
     type: CHANGE_PAGE,
     payload: {
@@ -78,6 +79,7 @@ export const setSearchIsLoading = (loading: boolean) => ({
 
 export const setTotalRowCount = (totalRowCount: number) => {
   const totalPages = Math.ceil(totalRowCount / rowsPerPage);
+
   return {
     type: SET_TOTAL_ROW_COUNT,
     payload: {

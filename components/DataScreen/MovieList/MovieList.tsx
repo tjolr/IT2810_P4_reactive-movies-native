@@ -9,7 +9,7 @@ import { MovieListObject } from '../../../GraphQL/models/movie.model';
 import { IThemeObject } from '../../../theme/theme.model';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setSearchIsLoading, setTotalRowCount } from '../../../redux/actions';
-import LoadingAnimation from '../../Generic/loading';
+import { LoadingAnimationBounce } from '../../Generic/loading';
 
 import { Icon } from 'react-native-elements';
 
@@ -33,7 +33,7 @@ const MovieList = () => {
     (state: RootStateOrAny) => state.movieReducer.searchIsLoading
   );
 
-  const { loading, error, data } = useQuery(buildMovieQuery(), {
+  const { loading, error, data, refetch } = useQuery(buildMovieQuery(), {
     variables: {
       searchString: searchStringRedux !== undefined ? searchStringRedux : '',
       page: pageRedux,
@@ -54,15 +54,17 @@ const MovieList = () => {
   if (loading)
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <LoadingAnimation />
+        <LoadingAnimationBounce />
       </View>
     );
 
   if (error)
     return (
-      <View>
-        <Text h4>Error while loading data!</Text>
-        <Text>Reason: ${error.message}</Text>
+      <View
+        style={[styles(theme).noMoviewsContainer, { backgroundColor: 'red' }]}
+      >
+        <Icon name="warning" containerStyle={{ margin: 5 }} />
+        <Text h4>Error loading movies</Text>
       </View>
     );
 
@@ -84,15 +86,10 @@ const MovieList = () => {
         ))
       ) : (
         <View
-          style={{
-            margin: 15,
-            padding: 15,
-            borderRadius: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'row',
-            backgroundColor: theme.colors.error,
-          }}
+          style={[
+            styles(theme).noMoviewsContainer,
+            { backgroundColor: theme.colors.secondary },
+          ]}
         >
           <Icon name="warning" containerStyle={{ margin: 5 }} />
           <Text h4> No movies matching your filter</Text>
@@ -110,7 +107,14 @@ const styles = (theme: IThemeObject) =>
     'movieListItemContainer:nth-child-odd': {
       backgroundColor: theme.colors.grey1,
     },
-    noMoviewsContainer: {},
+    noMoviewsContainer: {
+      margin: 15,
+      padding: 15,
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
   });
 
 export default MovieList;

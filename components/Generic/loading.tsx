@@ -1,10 +1,13 @@
-import React, {useContext} from 'react';
-import {Bounce} from 'react-native-animated-spinkit';
-import {ThemeContext, ThemeProps} from 'react-native-elements';
+import React, { useContext } from 'react';
+import { Bounce, Swing } from 'react-native-animated-spinkit';
+import { ThemeContext, ThemeProps } from 'react-native-elements';
 
-const LoadingAnimation = () => {
-  const {theme} = useContext<ThemeProps<any>>(ThemeContext);
+export const LoadingAnimationBounce = () => {
+  const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   return <Bounce size={250} color={theme.colors.primary} />;
 };
 
-export default LoadingAnimation;
+export const LoadingAnimationSwing = () => {
+  const { theme } = useContext<ThemeProps<any>>(ThemeContext);
+  return <Swing size={150} color={theme.colors.primary} />;
+};

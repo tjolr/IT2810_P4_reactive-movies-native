@@ -4,6 +4,7 @@ export interface IThemeObject {
 
 interface IColors {
   primary?: string;
+  primaryDark?: string;
   secondary?: string;
   white?: string;
   black?: string;
@@ -17,7 +18,9 @@ interface IColors {
 
 export const theme: IThemeObject = {
   colors: {
-    secondary: '#ffb732',
+    primary: '#1E6DAE',
+    primaryDark: '#18578B',
+    secondary: '#e5a42d',
     grey0: '#232323',
     grey1: '#282828',
     grey2: '#2d2d2d',

@@ -40,25 +40,27 @@ const Pagination = () => {
         disabledStyle={styles(theme).disabledPaginationButton}
       />
 
-      <View style={styles(theme).textContainer}>
-        <View style={styles(theme).textBox}>
-          <Text style={styles(theme).text}>
-            {pageIntervalRedux[0]}-
-            {/* If there are less than 25 matching movies,
+      {totalPagesRedux > 0 && (
+        <View style={styles(theme).textContainer}>
+          <View style={styles(theme).textBox}>
+            <Text style={styles(theme).text}>
+              {pageIntervalRedux[0]}-
+              {/* If there are less than 25 matching movies,
             show the total number of rowCount, instead of 25
             E.g: "1-17 of 17" instead of "1-25 of 17" */}
-            {pageIntervalRedux[1] > totalRowCountRedux
-              ? totalRowCountRedux
-              : pageIntervalRedux[1]}{' '}
-            of {totalRowCountRedux}
-          </Text>
+              {pageIntervalRedux[1] > totalRowCountRedux
+                ? totalRowCountRedux
+                : pageIntervalRedux[1]}{' '}
+              of {totalRowCountRedux}
+            </Text>
+          </View>
+          <View style={styles(theme).textBox}>
+            <Text style={styles(theme).text}>
+              Page {pageRedux} of {totalPagesRedux}
+            </Text>
+          </View>
         </View>
-        <View style={styles(theme).textBox}>
-          <Text style={styles(theme).text}>
-            Page {pageRedux} of {totalPagesRedux}
-          </Text>
-        </View>
-      </View>
+      )}
 
       <Icon
         name="arrow-forward"
