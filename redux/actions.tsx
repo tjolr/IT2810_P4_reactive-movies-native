@@ -6,13 +6,19 @@ import {
   UPDATE_SORT,
   SET_SEARCH_IS_LOADING,
   SET_TOTAL_ROW_COUNT,
+  HAS_PENDING_CHANGES,
 } from './actionTypes';
 import { defaultSort, ISort, rowsPerPage } from './models/movieReducer.model';
 import store from './store';
 
+export interface Action {
+  type: string;
+  payload: any;
+}
+
 /* Actions for updating the movie queries */
 
-export const updateSearch = (content: string) => {
+export const updateSearch = (content: string): Action => {
   // want to show the best matches for the search
   // therefore we dispatch action to set page to 1
   store.dispatch(changePage(1));
@@ -24,7 +30,7 @@ export const updateSearch = (content: string) => {
   };
 };
 
-export const changePage = (page: number) => {
+export const changePage = (page: number): Action => {
   // The pageInterval shows which of total rows that are display
   let pageInterval = [(page - 1) * rowsPerPage + 1, page * rowsPerPage];
 
@@ -37,7 +43,7 @@ export const changePage = (page: number) => {
   };
 };
 
-export const updateReleaseYear = (content: number[]) => {
+export const updateReleaseYear = (content: number[]): Action => {
   store.dispatch(changePage(1));
   return {
     type: UPDATE_RELEASE_YEAR,
@@ -47,7 +53,7 @@ export const updateReleaseYear = (content: number[]) => {
   };
 };
 
-export const updateRating = (content: number[]) => {
+export const updateRating = (content: number[]): Action => {
   store.dispatch(changePage(1));
   return {
     type: UPDATE_RATING,
@@ -57,7 +63,7 @@ export const updateRating = (content: number[]) => {
   };
 };
 
-export const updateSort = (content: ISort) => {
+export const updateSort = (content: ISort): Action => {
   store.dispatch(changePage(1));
   return {
     type: UPDATE_SORT,
@@ -70,14 +76,14 @@ export const updateSort = (content: ISort) => {
   };
 };
 
-export const setSearchIsLoading = (loading: boolean) => ({
+export const setSearchIsLoading = (loading: boolean): Action => ({
   type: SET_SEARCH_IS_LOADING,
   payload: {
     loading,
   },
 });
 
-export const setTotalRowCount = (totalRowCount: number) => {
+export const setTotalRowCount = (totalRowCount: number): Action => {
   const totalPages = Math.ceil(totalRowCount / rowsPerPage);
 
   return {
@@ -85,6 +91,17 @@ export const setTotalRowCount = (totalRowCount: number) => {
     payload: {
       totalRowCount,
       totalPages,
+    },
+  };
+};
+
+export const setReviewHasPendingChanges = (
+  hasPendingChanges: boolean
+): Action => {
+  return {
+    type: HAS_PENDING_CHANGES,
+    payload: {
+      hasPendingChanges,
     },
   };
 };

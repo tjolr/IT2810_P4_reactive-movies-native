@@ -1,18 +1,18 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './components/HomeScreen/HomeScreen';
 import DataScreen from './components/DataScreen/DataScreen';
-import {ThemeProvider} from 'react-native-elements';
+import { ThemeProvider } from 'react-native-elements';
 import DetailsScreen from './components/DetailsScreen/DetailsScreen';
-import {Provider as StoreProvider} from 'react-redux';
+import { Provider as StoreProvider } from 'react-redux';
 import store from './redux/store';
-import {ApolloProvider} from '@apollo/client';
-import {client} from './GraphQL/ApolloClient';
-import {theme} from './theme/theme.model';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './GraphQL/ApolloClient';
+import { theme } from './theme/theme.model';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {StatusBar} from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!

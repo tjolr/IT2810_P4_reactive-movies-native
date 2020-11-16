@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Bounce, Swing } from 'react-native-animated-spinkit';
+import { Bounce, Chase, Swing } from 'react-native-animated-spinkit';
 import { ThemeContext, ThemeProps } from 'react-native-elements';
 
 export const LoadingAnimationBounce = () => {
@@ -10,4 +10,9 @@ export const LoadingAnimationBounce = () => {
 export const LoadingAnimationSwing = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   return <Swing size={150} color={theme.colors.primary} />;
+};
+
+export const LoadingAnimationChase = () => {
+  const { theme } = useContext<ThemeProps<any>>(ThemeContext);
+  return <Chase size={20} color={theme.colors.primary} />;
 };
