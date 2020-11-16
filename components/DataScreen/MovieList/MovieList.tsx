@@ -5,7 +5,7 @@ import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { ScrollView, View } from 'react-native';
 import { Text, ThemeContext, ThemeProps } from 'react-native-elements';
 import MovieListItem from './MovieListItem';
-import { MovieListObject } from '../../../GraphQL/models/movie.model';
+import { IMovieListObject } from '../../../GraphQL/models/movie.model';
 import { IThemeObject } from '../../../theme/theme.model';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setSearchIsLoading, setTotalRowCount } from '../../../redux/actions';
@@ -71,7 +71,7 @@ const MovieList = () => {
   return (
     <ScrollView>
       {data && data.Movie.movies.length > 0 ? (
-        data.Movie.movies.map((row: MovieListObject, index: number) => (
+        data.Movie.movies.map((row: IMovieListObject, index: number) => (
           <View
             style={EStyleSheet.child(
               styles(theme),

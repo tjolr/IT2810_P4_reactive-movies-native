@@ -1,26 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { Text, ThemeContext, ThemeProps } from 'react-native-elements';
+import { ScrollView, StyleSheet } from 'react-native';
+import { ThemeContext, ThemeProps } from 'react-native-elements';
 import { IThemeObject } from '../../theme/theme.model';
-import { getFullYearNumber } from '../../utils/dates';
 import Reviews from './Reviews/Reviews';
+import { IMovieListObject } from '../../GraphQL/models/movie.model';
+import TitleBar, { ITitleBarProps } from './TitleBar/TitleBar';
 
-const DetailsScreen = ({ route }: any) => {
+interface IDetailScreenProps {
+  route: {
+    params: {
+      movieDetails: IMovieListObject;
+    };
+  };
+}
+
+const DetailsScreen = ({ route }: IDetailScreenProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
+  const { movieDetails } = route.params;
+
+  const TitleBarProp: ITitleBarProps = {
+    title: movieDetails.title,
+    release_date: movieDetails.release_date,
+    vote_average: movieDetails.vote_average,
+    vote_count: movieDetails.vote_count,
+    runtime: movieDetails.runtime,
+  };
 
   return (
     <ScrollView style={styles(theme).container}>
       <StatusBar style="light" animated={true} />
-      <View style={{ padding: 20 }}>
-        <Text h2>{route.params.movieDetails.title}</Text>
-        <Text h4>
-          Release year:{' '}
-          {getFullYearNumber(route.params.movieDetails.release_date)}
-        </Text>
-        <Text h4>User rating: {route.params.movieDetails.vote_average}</Text>
-      </View>
-      <Reviews movieId={route.params.movieDetails._id} />
+      <TitleBar {...TitleBarProp} />
+      <Reviews movieId={movieDetails._id} />
     </ScrollView>
   );
 };

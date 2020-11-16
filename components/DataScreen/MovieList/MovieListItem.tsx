@@ -2,13 +2,13 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { MovieListObject } from '../../../GraphQL/models/movie.model';
+import { IMovieListObject } from '../../../GraphQL/models/movie.model';
 import { getFullYearNumber } from '../../../utils/dates';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 interface IMovieListItemProps {
-  row: MovieListObject;
+  row: IMovieListObject;
 }
 
 const MovieListItem = (props: IMovieListItemProps) => {
