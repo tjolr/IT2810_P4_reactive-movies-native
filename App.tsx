@@ -13,6 +13,7 @@ import { client } from './GraphQL/ApolloClient';
 import { theme } from './theme/theme.model';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { StatusBar } from 'expo-status-bar';
+import RootNavigation from './components/Navigation/RootNavigation';
 
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
@@ -25,46 +26,7 @@ const App = () => {
       <StoreProvider store={store}>
         <ThemeProvider theme={theme} useDark={true}>
           <StatusBar style="dark" animated={true} />
-
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-              <Stack.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
-                }}
-              />
-              <Stack.Screen
-                name="Movies"
-                component={DataScreen}
-                options={{
-                  headerStyle: {
-                    backgroundColor: theme.colors.grey3,
-                  },
-                  headerTintColor: '#fff',
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
-                }}
-              />
-              <Stack.Screen
-                name="Detail"
-                component={DetailsScreen}
-                options={{
-                  headerStyle: {
-                    backgroundColor: theme.colors.grey3,
-                  },
-                  headerTintColor: '#fff',
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
-                }}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
+          <RootNavigation />
         </ThemeProvider>
       </StoreProvider>
     </ApolloProvider>
