@@ -7,11 +7,16 @@ export interface IMovieItemField {
 export const MovieItemFields: IMovieItemField[] = [
   { field: 'id', hide: true },
   { field: '_id', hide: true },
-  { field: 'title', sortable: true },
-  { field: 'release_date', sortable: true },
-  { field: 'vote_average', sortable: true },
+  { field: 'title' },
+  { field: 'release_date' },
+  { field: 'vote_average' },
+];
+
+export const MovieItemDetailFields: IMovieItemField[] = [
   { field: 'runtime' },
   { field: 'vote_count' },
   { field: 'overview' },
   { field: 'tagline' },
+  { field: 'genres { name }' },
+  { field: 'crew { name job }' },
 ];

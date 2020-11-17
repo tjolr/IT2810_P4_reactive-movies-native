@@ -1,9 +1,12 @@
 import gql from 'graphql-tag';
-import { MovieItemFields } from '../components/DataScreen/MovieList/models/movieItem.model';
+import {
+  MovieItemDetailFields,
+  MovieItemFields,
+} from '../components/DataScreen/MovieList/models/movieItem.model';
 
 export const buildMovieQuery = () => {
   const fields: string[] = [];
-  MovieItemFields.map((movieItem) => fields.push(movieItem.field));
+  MovieItemFields.map(movieItem => fields.push(movieItem.field));
 
   const fieldString = fields.join('\n');
 
@@ -17,13 +20,6 @@ export const buildMovieQuery = () => {
       ) {
         movies {
           ${fieldString}
-          genres {
-            name
-          }
-          crew {
-            name
-            job
-          }
         }
         totalRowCount 
       }
@@ -33,19 +29,23 @@ export const buildMovieQuery = () => {
   return query;
 };
 
-export const DETAIL_MOVIE_QUERY = gql`
+export const getDetailMovieQuery = () => {
+  const fields: string[] = [];
+  MovieItemDetailFields.map(movieItem => fields.push(movieItem.field));
+
+  const fieldString = fields.join('\n');
+
+  const query = gql`
   query($searchString: String) {
     Movie(searchString: $searchString) {
       movies {
-        tagline
-        overview
-        genres {
-          name
-        }
+        ${fieldString}
       }
     }
   }
-`;
+  `;
+  return query;
+};
 
 export const MOVIE_REVIEW_QUERY = gql`
   query($movieId: String) {

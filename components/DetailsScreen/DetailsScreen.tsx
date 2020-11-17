@@ -1,13 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { ThemeContext, ThemeProps } from 'react-native-elements';
 import { IThemeObject } from '../../theme/theme.model';
 import Reviews from './Reviews/Reviews';
 import { IMovieListObject } from '../../GraphQL/models/movie.model';
-import TitleBar, { ITitleBarProps } from './TitleBar/TitleBar';
-import Description, { IDescriptionProps } from './Description/Description';
-import Crew, { ICrewProps } from './Crew/Crew';
+import MovieDetails from './MovieDetails/MovieDetails';
+import { LoadingAnimationChase } from '../Generic/loading';
+import { useQuery } from '@apollo/client';
+import { getDetailMovieQuery } from '../../GraphQL/QueryBuilder';
+import Userfeedback from '../Generic/Userfeedback';
 
 interface IDetailScreenProps {
   route: {
@@ -21,31 +23,35 @@ const DetailsScreen = ({ route }: IDetailScreenProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   const { movieDetails } = route.params;
 
-  // Creating prop objects for sending data to child components
-  const TitleBarProp: ITitleBarProps = {
-    title: movieDetails.title,
-    release_date: movieDetails.release_date,
-    vote_average: movieDetails.vote_average,
-    vote_count: movieDetails.vote_count,
-    runtime: movieDetails.runtime,
-  };
+  const { loading, error, data } = useQuery(getDetailMovieQuery(), {
+    variables: {
+      searchString: movieDetails.title != null ? movieDetails.title : '',
+    },
+  });
 
-  const DescriptionProp: IDescriptionProps = {
-    overview: movieDetails.overview,
-    genres: movieDetails.genres,
-    tagline: movieDetails.tagline,
-  };
+  if (loading)
+    return (
+      <View style={styles(theme).loadingContainer}>
+        <LoadingAnimationChase />
+      </View>
+    );
 
-  const CrewProp: ICrewProps = {
-    crew: movieDetails.crew,
+  if (error)
+    return (
+      <View>
+        <Userfeedback message="Error loading details" type="error" />
+      </View>
+    );
+
+  const movieDetailsExtended: IMovieListObject = data && {
+    ...movieDetails,
+    ...data.Movie.movies[0],
   };
 
   return (
     <ScrollView style={styles(theme).container}>
       <StatusBar style="light" animated={true} />
-      <TitleBar {...TitleBarProp} />
-      <Description {...DescriptionProp} />
-      <Crew {...CrewProp} />
+      <MovieDetails movieDetails={movieDetailsExtended} />
       <Reviews movieId={movieDetails._id} />
     </ScrollView>
   );
@@ -58,5 +64,11 @@ const styles = (theme: IThemeObject) =>
     container: {
       flex: 1,
       backgroundColor: theme.colors.grey0,
+    },
+    loadingContainer: {
+      flex: 1,
+      backgroundColor: theme.colors.grey0,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });

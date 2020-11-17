@@ -26,8 +26,8 @@ const ReviewFormModal = ({ movieId }: ReviewFormModalProps) => {
         onPress={toggleFormModal}
         icon={<Icon name="add-circle" />}
         title="Add review"
-        containerStyle={{ borderRadius: 12 }}
-        buttonStyle={{ padding: 6 }}
+        containerStyle={{ borderRadius: 8 }}
+        buttonStyle={{ padding: 4 }}
       />
 
       <Modal

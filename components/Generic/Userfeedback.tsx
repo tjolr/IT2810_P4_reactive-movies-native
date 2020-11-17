@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { ThemeProps, ThemeContext, Icon, Text } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { IThemeObject } from '../../theme/theme.model';
 
 interface IUserfeedbackProps {
   message: string;
@@ -40,7 +39,7 @@ const Userfeedback = ({ message, type }: IUserfeedbackProps) => {
         name={feedbackTypeInfo[type].iconName}
         containerStyle={{ margin: 5 }}
       />
-      <Text h4>{message}</Text>
+      <Text style={{ fontSize: 18 }}>{message}</Text>
     </View>
   );
 };
@@ -48,7 +47,7 @@ const Userfeedback = ({ message, type }: IUserfeedbackProps) => {
 const styles = EStyleSheet.create({
   userFeedbackContainer: {
     margin: 15,
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',

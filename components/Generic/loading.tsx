@@ -14,5 +14,5 @@ export const LoadingAnimationSwing = () => {
 
 export const LoadingAnimationChase = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
-  return <Chase size={20} color={theme.colors.primary} />;
+  return <Chase size={50} color={theme.colors.primary} />;
 };

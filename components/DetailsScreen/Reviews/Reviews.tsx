@@ -1,16 +1,16 @@
 import { useQuery } from '@apollo/client';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { Icon, Text, ThemeContext, ThemeProps } from 'react-native-elements';
+import { Text, ThemeContext, ThemeProps } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { MOVIE_REVIEW_QUERY } from '../../../GraphQL/QueryBuilder';
 import { setReviewHasPendingChanges } from '../../../redux/actions';
 import { IThemeObject } from '../../../theme/theme.model';
-import { LoadingAnimationSwing } from '../../Generic/loading';
 import Userfeedback from '../../Generic/Userfeedback';
 import ReviewFormModal from './ReviewForm.modal';
 import ReviewItem from './ReviewItem';
+import Fade from 'react-native-fade';
 
 interface ReviewsProps {
   movieId: string;
@@ -38,12 +38,16 @@ const Reviews = ({ movieId }: ReviewsProps) => {
 
   return (
     <View style={styles(theme).container}>
-      <View style={styles(theme).header}>
-        <View style={styles(theme).reviewTitleAndNumberContainer}>
-          <Text h3>REVIEWS</Text>
-          {!loading && (
-            // Shows the number of reviews, with backgroundcolor dependent
-            // on how many reviews there is for current movie
+      <Fade
+        visible={!loading && data !== undefined}
+        direction="down"
+        duration={1000}
+      >
+        <View style={styles(theme).header}>
+          <View style={styles(theme).reviewTitleAndNumberContainer}>
+            <Text h3>Reviews</Text>
+            {/* Shows the number of reviews, with backgroundcolor dependent on
+            how many reviews there is for current movie */}
             <View
               style={[
                 styles(theme).reviewCount,
@@ -57,35 +61,31 @@ const Reviews = ({ movieId }: ReviewsProps) => {
             >
               <Text>{data && data.Reviews.length}</Text>
             </View>
-          )}
+          </View>
+
+          <ReviewFormModal movieId={movieId} />
         </View>
 
-        <ReviewFormModal movieId={movieId} />
-      </View>
-
-      <View style={styles(theme).contentContainer}>
-        {loading ? (
-          <View style={styles(theme).loadingContainer}>
-            <LoadingAnimationSwing />
-          </View>
-        ) : error ? (
-          <Userfeedback message="Error while loading reviews" type="error" />
-        ) : data !== undefined && data.Reviews.length === 0 ? (
-          <Userfeedback message="No reviews for this movie" type="warning" />
-        ) : (
-          data.Reviews.filter((review: any) => review.text && review.author)
-            /* Reverses the list to show newest review on top */
-            .slice(0)
-            .reverse()
-            .map((review: any, index: number) => (
-              <ReviewItem
-                key={index}
-                author={review.author}
-                text={review.text}
-              />
-            ))
-        )}
-      </View>
+        <View style={styles(theme).contentContainer}>
+          {loading ? null : error ? (
+            <Userfeedback message="Error while loading reviews" type="error" />
+          ) : data !== undefined && data.Reviews.length === 0 ? (
+            <Userfeedback message="No reviews for this movie" type="warning" />
+          ) : (
+            data.Reviews.filter((review: any) => review.text && review.author)
+              /* Reverses the list to show newest review on top */
+              .slice(0)
+              .reverse()
+              .map((review: any, index: number) => (
+                <ReviewItem
+                  key={index}
+                  author={review.author}
+                  text={review.text}
+                />
+              ))
+          )}
+        </View>
+      </Fade>
     </View>
   );
 };
@@ -97,17 +97,18 @@ const styles = (theme: IThemeObject) =>
       padding: 10,
       paddingBottom: 15,
       width: '100%',
+      minHeight: '100%',
     },
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingTop: 8,
-      paddingBottom: 8,
+      paddingTop: 3,
+      paddingBottom: 3,
     },
     reviewCount: {
-      width: 25,
-      height: 25,
+      width: 28,
+      height: 28,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 8,
