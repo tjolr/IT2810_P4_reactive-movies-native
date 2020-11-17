@@ -4,13 +4,13 @@ import { Text, ThemeContext, ThemeProps } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { IThemeObject } from '../../../theme/theme.model';
 
-interface ReviewItemProps {
+interface IReviewItemProps {
   author: string;
   text: string;
 }
 
 /* Review item that shows an review author and review text */
-const ReviewItem = ({ author, text }: ReviewItemProps) => {
+const ReviewItem = ({ author, text }: IReviewItemProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
 
   return (

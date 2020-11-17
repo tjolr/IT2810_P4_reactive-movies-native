@@ -11,6 +11,7 @@ import Userfeedback from '../../Generic/Userfeedback';
 import ReviewFormModal from './ReviewForm.modal';
 import ReviewItem from './ReviewItem';
 import Fade from 'react-native-fade';
+import { IReviewListObject } from '../../../GraphQL/models/review.model';
 
 interface ReviewsProps {
   movieId: string;
@@ -76,11 +77,13 @@ const Reviews = ({ movieId }: ReviewsProps) => {
           ) : data !== undefined && data.Reviews.length === 0 ? (
             <Userfeedback message="No reviews for this movie" type="warning" />
           ) : (
-            data.Reviews.filter((review: any) => review.text && review.author)
+            data.Reviews.filter(
+              (review: IReviewListObject) => review.text && review.author
+            )
               /* Reverses the list to show newest review on top */
               .slice(0)
               .reverse()
-              .map((review: any, index: number) => (
+              .map((review: IReviewListObject, index: number) => (
                 <ReviewItem
                   key={index}
                   author={review.author}

@@ -1,7 +1,6 @@
 export interface IMovieItemField {
   field: string;
   hide?: boolean;
-  sortable?: boolean;
 }
 
 export const MovieItemFields: IMovieItemField[] = [

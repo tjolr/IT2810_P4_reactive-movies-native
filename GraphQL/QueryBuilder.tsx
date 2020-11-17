@@ -1,12 +1,15 @@
 import gql from 'graphql-tag';
 import {
+  IMovieItemField,
   MovieItemDetailFields,
   MovieItemFields,
 } from '../components/DataScreen/MovieList/models/movieItem.model';
 
 export const buildMovieQuery = () => {
   const fields: string[] = [];
-  MovieItemFields.map(movieItem => fields.push(movieItem.field));
+  MovieItemFields.map((movieItem: IMovieItemField) =>
+    fields.push(movieItem.field)
+  );
 
   const fieldString = fields.join('\n');
 
@@ -31,7 +34,9 @@ export const buildMovieQuery = () => {
 
 export const getDetailMovieQuery = () => {
   const fields: string[] = [];
-  MovieItemDetailFields.map(movieItem => fields.push(movieItem.field));
+  MovieItemDetailFields.map((movieItem: IMovieItemField) =>
+    fields.push(movieItem.field)
+  );
 
   const fieldString = fields.join('\n');
 

@@ -29,6 +29,8 @@ Når `expo-cli` er installert kan du starte prosjektet ved å kjøre kommandoen
 > expo-start
 ```
 
+Deretter må du laste ned appen Expo client på en smarttelefon, og scann QR-koden som vises på localhost:19002 eller i terminalen.
+
 # Dokumentasjon
 
 Vi kom fort frem til at vi ville implementere søk i en film-database, og fant et passende [datasett på Kaggle](https://www.kaggle.com/tmdb/tmdb-movie-metadata).
