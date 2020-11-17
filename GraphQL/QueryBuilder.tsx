@@ -20,6 +20,10 @@ export const buildMovieQuery = () => {
           genres {
             name
           }
+          crew {
+            name
+            job
+          }
         }
         totalRowCount 
       }

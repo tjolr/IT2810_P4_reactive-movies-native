@@ -10,8 +10,14 @@ export interface IMovieListObject {
   overview: string;
   genres: IGenre[];
   tagline: string;
+  crew: ICrew[];
 }
 
 export interface IGenre {
   name: string;
+}
+
+export interface ICrew {
+  name: string;
+  job: string;
 }

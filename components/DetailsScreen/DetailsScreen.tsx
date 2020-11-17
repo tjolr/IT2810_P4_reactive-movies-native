@@ -7,6 +7,7 @@ import Reviews from './Reviews/Reviews';
 import { IMovieListObject } from '../../GraphQL/models/movie.model';
 import TitleBar, { ITitleBarProps } from './TitleBar/TitleBar';
 import Description, { IDescriptionProps } from './Description/Description';
+import Crew, { ICrewProps } from './Crew/Crew';
 
 interface IDetailScreenProps {
   route: {
@@ -34,11 +35,16 @@ const DetailsScreen = ({ route }: IDetailScreenProps) => {
     tagline: movieDetails.tagline,
   };
 
+  const CrewProp: ICrewProps = {
+    crew: movieDetails.crew,
+  };
+
   return (
     <ScrollView style={styles(theme).container}>
       <StatusBar style="light" animated={true} />
       <TitleBar {...TitleBarProp} />
       <Description {...DescriptionProp} />
+      <Crew {...CrewProp} />
       <Reviews movieId={movieDetails._id} />
     </ScrollView>
   );
