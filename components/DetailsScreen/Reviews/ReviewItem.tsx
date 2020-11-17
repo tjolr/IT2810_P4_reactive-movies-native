@@ -23,12 +23,10 @@ const ReviewItem = ({ author, text }: ReviewItemProps) => {
 const styles = (theme: IThemeObject) =>
   EStyleSheet.create({
     container: {
-      backgroundColor: theme.colors.grey3,
-      marginTop: 5,
+      backgroundColor: theme.colors.grey4,
+      marginTop: 6,
       padding: 8,
-      borderRadius: 5,
-      borderColor: theme.colors.grey4,
-      borderWidth: 2,
+      borderRadius: 10,
     },
     author: {
       fontWeight: 'bold',

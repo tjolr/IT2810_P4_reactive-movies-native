@@ -3,15 +3,14 @@ import { useQuery } from '@apollo/client';
 import { buildMovieQuery } from '../../../GraphQL/QueryBuilder';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { ScrollView, View } from 'react-native';
-import { Text, ThemeContext, ThemeProps } from 'react-native-elements';
+import { ThemeContext, ThemeProps } from 'react-native-elements';
 import MovieListItem from './MovieListItem';
 import { IMovieListObject } from '../../../GraphQL/models/movie.model';
 import { IThemeObject } from '../../../theme/theme.model';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setSearchIsLoading, setTotalRowCount } from '../../../redux/actions';
 import { LoadingAnimationBounce } from '../../Generic/loading';
-
-import { Icon } from 'react-native-elements';
+import Userfeedback from '../../Generic/Userfeedback';
 
 const MovieList = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
@@ -59,14 +58,7 @@ const MovieList = () => {
     );
 
   if (error)
-    return (
-      <View
-        style={[styles(theme).noMoviewsContainer, { backgroundColor: 'red' }]}
-      >
-        <Icon name="warning" containerStyle={{ margin: 5 }} />
-        <Text h4>Error loading movies</Text>
-      </View>
-    );
+    return <Userfeedback message="Error loading movies" type="error" />;
 
   return (
     <ScrollView>
@@ -85,15 +77,7 @@ const MovieList = () => {
           </View>
         ))
       ) : (
-        <View
-          style={[
-            styles(theme).noMoviewsContainer,
-            { backgroundColor: theme.colors.secondary },
-          ]}
-        >
-          <Icon name="warning" containerStyle={{ margin: 5 }} />
-          <Text h4> No movies matching your filter</Text>
-        </View>
+        <Userfeedback message="No movies matching your filter" type="warning" />
       )}
     </ScrollView>
   );
@@ -106,14 +90,6 @@ const styles = (theme: IThemeObject) =>
     },
     'movieListItemContainer:nth-child-odd': {
       backgroundColor: theme.colors.grey1,
-    },
-    noMoviewsContainer: {
-      margin: 15,
-      padding: 15,
-      borderRadius: 10,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
     },
   });
 

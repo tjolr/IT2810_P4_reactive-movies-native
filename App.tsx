@@ -1,11 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './components/HomeScreen/HomeScreen';
-import DataScreen from './components/DataScreen/DataScreen';
 import { ThemeProvider } from 'react-native-elements';
-import DetailsScreen from './components/DetailsScreen/DetailsScreen';
 import { Provider as StoreProvider } from 'react-redux';
 import store from './redux/store';
 import { ApolloProvider } from '@apollo/client';
@@ -15,10 +10,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { StatusBar } from 'expo-status-bar';
 import RootNavigation from './components/Navigation/RootNavigation';
 
-EStyleSheet.build({
-  // always call EStyleSheet.build() even if you don't use global variables!
-});
-const Stack = createStackNavigator();
+// Needs to trigger this to use the ExtendedStylesheet
+EStyleSheet.build({});
 
 const App = () => {
   return (

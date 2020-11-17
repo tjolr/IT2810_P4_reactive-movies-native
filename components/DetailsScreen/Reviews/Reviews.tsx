@@ -8,6 +8,7 @@ import { MOVIE_REVIEW_QUERY } from '../../../GraphQL/QueryBuilder';
 import { setReviewHasPendingChanges } from '../../../redux/actions';
 import { IThemeObject } from '../../../theme/theme.model';
 import { LoadingAnimationSwing } from '../../Generic/loading';
+import Userfeedback from '../../Generic/Userfeedback';
 import ReviewFormModal from './ReviewForm.modal';
 import ReviewItem from './ReviewItem';
 
@@ -41,6 +42,8 @@ const Reviews = ({ movieId }: ReviewsProps) => {
         <View style={styles(theme).reviewTitleAndNumberContainer}>
           <Text h3>REVIEWS</Text>
           {!loading && (
+            // Shows the number of reviews, with backgroundcolor dependent
+            // on how many reviews there is for current movie
             <View
               style={[
                 styles(theme).reviewCount,
@@ -66,16 +69,10 @@ const Reviews = ({ movieId }: ReviewsProps) => {
             <LoadingAnimationSwing />
           </View>
         ) : error ? (
-          <View
-            style={[
-              styles(theme).userFeedbackContainer,
-              { backgroundColor: 'darkred' },
-            ]}
-          >
-            <Icon name="mood-bad" containerStyle={{ margin: 5 }} />
-            <Text h4> Error while loading reviews</Text>
-          </View>
-        ) : data !== undefined && data.Reviews.length > 0 ? (
+          <Userfeedback message="Error while loading reviews" type="error" />
+        ) : data !== undefined && data.Reviews.length === 0 ? (
+          <Userfeedback message="No reviews for this movie" type="warning" />
+        ) : (
           data.Reviews.filter((review: any) => review.text && review.author)
             /* Reverses the list to show newest review on top */
             .slice(0)
@@ -87,16 +84,6 @@ const Reviews = ({ movieId }: ReviewsProps) => {
                 text={review.text}
               />
             ))
-        ) : (
-          <View
-            style={[
-              styles(theme).userFeedbackContainer,
-              { backgroundColor: theme.colors.secondary },
-            ]}
-          >
-            <Icon name="mood-bad" containerStyle={{ margin: 5 }} />
-            <Text h4> No reviews for this movie.</Text>
-          </View>
         )}
       </View>
     </View>
@@ -123,16 +110,8 @@ const styles = (theme: IThemeObject) =>
       height: 25,
       justifyContent: 'center',
       alignItems: 'center',
-      borderRadius: 3,
+      borderRadius: 8,
       marginLeft: 6,
-    },
-    userFeedbackContainer: {
-      margin: 15,
-      padding: 15,
-      borderRadius: 10,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
     },
     loadingContainer: {
       flex: 1,

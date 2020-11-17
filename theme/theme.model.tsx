@@ -18,7 +18,7 @@ interface IColors {
 
 export const theme: IThemeObject = {
   colors: {
-    primary: '#1E6DAE',
+    primary: '#3b94dd',
     primaryDark: '#18578B',
     secondary: '#e5a42d',
     grey0: '#232323',

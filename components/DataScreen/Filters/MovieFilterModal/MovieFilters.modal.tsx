@@ -15,7 +15,6 @@ const MovieFilters = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
 
   const [showFilters, setShowFilters] = useState(false);
-  const [isFilterActive, setIsFilterActive] = useState(false);
 
   const toggleModal = () => {
     setShowFilters(!showFilters);
@@ -24,27 +23,11 @@ const MovieFilters = () => {
   return (
     <View style={styles(theme).buttonsViewContainer}>
       <Button
-        title="Filters"
+        title="Filter"
         onPress={toggleModal}
         icon={<Icon name="sort" />}
         iconRight={true}
-        containerStyle={{ flex: 2.8, marginRight: 10 }}
-      />
-      <Button
-        title="Clear"
-        onPress={toggleModal}
-        type="outline"
-        icon={
-          <Icon
-            name="clear"
-            color={isFilterActive ? theme.colors.primary : theme.colors.grey3}
-          />
-        }
-        iconRight={true}
-        containerStyle={{ flex: 1 }}
-        disabled={!isFilterActive}
-        disabledStyle={{ backgroundColor: theme.colors.grey4 }}
-        titleStyle={{ padding: 2 }}
+        containerStyle={{ flex: 2.8 }}
       />
 
       <Modal
@@ -77,9 +60,6 @@ const styles = (theme: IThemeObject) =>
       bottom: 0,
       left: 0,
       right: 0,
-    },
-    filterBtn: {
-      width: '40%',
     },
     buttonsViewContainer: {
       display: 'flex',

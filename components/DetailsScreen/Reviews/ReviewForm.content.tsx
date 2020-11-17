@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { ADD_REVIEW } from '../../../GraphQL/MutationBuilder';
 import { setReviewHasPendingChanges } from '../../../redux/actions';
 import { IThemeObject } from '../../../theme/theme.model';
+import Userfeedback from '../../Generic/Userfeedback';
 
 interface ReviewFormProps {
   movieId: string;
@@ -77,12 +78,11 @@ const ReviewFormContent = ({ movieId, toggleFormModal }: ReviewFormProps) => {
   };
 
   return (
-    <View style={styles(theme).container}>
+    <View style={styles.container}>
       <TextInput
-        style={[styles(theme).inputContainerStyle, { height: 40 }]}
+        style={[styles.inputContainerStyle, { height: 40 }]}
         placeholder="Author"
         placeholderTextColor="grey"
-        keyboardAppearance="dark"
         onChangeText={(value: string) =>
           setFormValues({ ...formValues, author: value })
         }
@@ -97,7 +97,7 @@ const ReviewFormContent = ({ movieId, toggleFormModal }: ReviewFormProps) => {
         // make sure iOS and Android behaves the same with text
         // aligned to the top
         textAlignVertical="top"
-        style={[styles(theme).inputContainerStyle, { height: 60 }]}
+        style={[styles.inputContainerStyle, { height: 60 }]}
         placeholder="Text"
         placeholderTextColor="grey"
         keyboardAppearance="dark"
@@ -108,9 +108,9 @@ const ReviewFormContent = ({ movieId, toggleFormModal }: ReviewFormProps) => {
       />
 
       <Button
-        buttonStyle={styles(theme).buttonStyle}
+        buttonStyle={styles.buttonStyle}
         title="SUBMIT"
-        containerStyle={styles(theme).buttonContainerStyle}
+        containerStyle={styles.buttonContainerStyle}
         icon={<Icon name="send" style={{ marginLeft: 6 }} />}
         loading={mutationLoading}
         loadingProps={{ color: theme.colors.secondary }}
@@ -120,60 +120,35 @@ const ReviewFormContent = ({ movieId, toggleFormModal }: ReviewFormProps) => {
       />
 
       {mutationError ? (
-        <View
-          style={[
-            styles(theme).userFeedbackContainer,
-            { backgroundColor: 'red' },
-          ]}
-        >
-          <Icon name="warning" containerStyle={{ margin: 5 }} />
-          <Text h4>Error submitting your review</Text>
-        </View>
+        <Userfeedback message="Error submitting your review" type="error" />
       ) : (
         successfulSubmit && (
-          <View
-            style={[
-              styles(theme).userFeedbackContainer,
-              { backgroundColor: 'green' },
-            ]}
-          >
-            <Icon name="check" containerStyle={{ margin: 5 }} />
-            <Text h4>Review added</Text>
-          </View>
+          <Userfeedback message="Review successfully added" type="success" />
         )
       )}
     </View>
   );
 };
 
-const styles = (theme: IThemeObject) =>
-  StyleSheet.create({
-    container: {
-      paddingTop: 5,
-    },
-    inputContainerStyle: {
-      borderColor: 'grey',
-      borderWidth: 1,
-      paddingLeft: 8,
-      color: 'white',
-      borderRadius: 5,
-      marginTop: 8,
-      fontSize: 16,
-    },
-    buttonStyle: {
-      padding: 10,
-    },
-    buttonContainerStyle: {
-      marginTop: 10,
-    },
-    userFeedbackContainer: {
-      margin: 15,
-      padding: 15,
-      borderRadius: 10,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 5,
+  },
+  inputContainerStyle: {
+    borderColor: 'grey',
+    borderWidth: 1,
+    paddingLeft: 8,
+    color: 'white',
+    borderRadius: 5,
+    marginTop: 8,
+    fontSize: 16,
+  },
+  buttonStyle: {
+    padding: 10,
+  },
+  buttonContainerStyle: {
+    marginTop: 10,
+  },
+});
 
 export default ReviewFormContent;
