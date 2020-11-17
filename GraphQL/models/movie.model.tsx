@@ -9,6 +9,7 @@ export interface IMovieListObject {
   vote_count: number;
   overview: string;
   genres: IGenre[];
+  tagline: string;
 }
 
 export interface IGenre {

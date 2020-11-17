@@ -12,4 +12,5 @@ export const MovieItemFields: IMovieItemField[] = [
   { field: 'runtime' },
   { field: 'vote_count' },
   { field: 'overview' },
+  { field: 'tagline' },
 ];

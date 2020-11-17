@@ -31,6 +31,7 @@ const DetailsScreen = ({ route }: IDetailScreenProps) => {
   const DescriptionProp: IDescriptionProps = {
     overview: movieDetails.overview,
     genres: movieDetails.genres,
+    tagline: movieDetails.tagline,
   };
 
   return (

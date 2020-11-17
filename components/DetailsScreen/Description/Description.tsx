@@ -7,11 +7,13 @@ import GenreTag from './GenreTag';
 export interface IDescriptionProps {
   overview: string;
   genres: IGenre[];
+  tagline: string;
 }
 
 const Description = (props: IDescriptionProps) => {
   return (
     <View style={styles.container}>
+      <Text style={{ fontStyle: 'italic' }}>{props.tagline}</Text>
       <View style={styles.genreContainer}>
         {props.genres.length > 0 ? (
           props.genres.map((genre: IGenre, index: number) => (
@@ -37,6 +39,7 @@ const styles = StyleSheet.create({
   genreContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    paddingTop: 10,
   },
   genre: {
     marginRight: 5,
