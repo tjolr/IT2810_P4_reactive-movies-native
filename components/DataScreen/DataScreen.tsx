@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { View, SafeAreaView } from 'react-native';
-import { Text, ThemeProps } from 'react-native-elements';
+import { ThemeProps } from 'react-native-elements';
 import { ThemeContext } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { IThemeObject } from '../../theme/theme.model';
