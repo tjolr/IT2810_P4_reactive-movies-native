@@ -7,4 +7,10 @@ export interface IMovieListObject {
   vote_average: number;
   runtime: number;
   vote_count: number;
+  overview: string;
+  genres: IGenre[];
+}
+
+export interface IGenre {
+  name: string;
 }

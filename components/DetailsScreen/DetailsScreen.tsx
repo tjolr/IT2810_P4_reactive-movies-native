@@ -6,6 +6,7 @@ import { IThemeObject } from '../../theme/theme.model';
 import Reviews from './Reviews/Reviews';
 import { IMovieListObject } from '../../GraphQL/models/movie.model';
 import TitleBar, { ITitleBarProps } from './TitleBar/TitleBar';
+import Description, { IDescriptionProps } from './Description/Description';
 
 interface IDetailScreenProps {
   route: {
@@ -27,10 +28,16 @@ const DetailsScreen = ({ route }: IDetailScreenProps) => {
     runtime: movieDetails.runtime,
   };
 
+  const DescriptionProp: IDescriptionProps = {
+    overview: movieDetails.overview,
+    genres: movieDetails.genres,
+  };
+
   return (
     <ScrollView style={styles(theme).container}>
       <StatusBar style="light" animated={true} />
       <TitleBar {...TitleBarProp} />
+      <Description {...DescriptionProp} />
       <Reviews movieId={movieDetails._id} />
     </ScrollView>
   );
