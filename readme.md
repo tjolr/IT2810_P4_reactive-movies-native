@@ -56,7 +56,7 @@ For å sette et globalt theme i appliasjonen har vi brukt `ThemeProvider` fra Re
 
 #### React Native Animated Spinkit
 
-Bibliotek med animasjoner som vi har brukt for å gi tilbakemelding til bruker om at siden laster inn. Komponenter vi har brukt er `<Bounce>` og `<Swing>`.
+Bibliotek med animasjoner som vi har brukt for å gi tilbakemelding til bruker om at siden laster inn. Komponenter vi har brukt er `<Bounce>`, `<Chase>` og `<Swing>`.
 
 #### React Native Extended Stylesheet
 

@@ -35,7 +35,9 @@ const Pagination = () => {
         color={theme.colors.primary}
         reverseColor="white"
         name="arrow-back"
+        // Go to previous page
         onPress={() => setNewPage(pageRedux - 1)}
+        // Disable previous if current page is first page
         disabled={pageRedux === 1}
         disabledStyle={styles(theme).disabledPaginationButton}
       />
@@ -68,7 +70,9 @@ const Pagination = () => {
         raised={true}
         color={theme.colors.primary}
         reverseColor="white"
+        // Go to next page
         onPress={() => setNewPage(pageRedux + 1)}
+        // Disable if current page is last page
         disabled={pageRedux === totalPagesRedux}
         disabledStyle={styles(theme).disabledPaginationButton}
       />
@@ -94,7 +98,9 @@ const styles = (theme: IThemeObject) =>
       borderRadius: 50,
       backgroundColor: theme.colors.grey4,
     },
-    disabledPaginationButton: { backgroundColor: theme.colors.grey4 },
+    disabledPaginationButton: {
+      backgroundColor: theme.colors.grey4,
+    },
     text: {
       margin: 0,
       padding: 0,

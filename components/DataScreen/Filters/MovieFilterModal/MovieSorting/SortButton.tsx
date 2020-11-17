@@ -23,18 +23,26 @@ interface SortButtonProps {
 export const SortButton = (props: SortButtonProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   const dispatch = useDispatch();
+
+  // Gets redux state of which sort button is active
+  // Needs this to decide if current button should
+  // be active or not
   const sortFieldRedux = useSelector(
     (state: RootStateOrAny) => state.movieReducer.sort
   );
 
+  // Checks if "this" button is active
   const isActiveSortField = (): boolean => {
     return sortFieldRedux.field === props.field;
   };
 
   const [sortState, setSortState] = useState(
+    // If this button is active, use direction from redux store
+    // if its inactive, set to default
     isActiveSortField() ? sortFieldRedux.direction : defaultSortDirection
   );
 
+  // Sets sortbutton to next sortstate
   const nextState = () => {
     const nextIndex = sortDirectionList.indexOf(sortState) + 1;
     const nextSortDirection: SortDirection =
@@ -43,10 +51,12 @@ export const SortButton = (props: SortButtonProps) => {
     setSortState(nextSortDirection);
 
     const sort: ISort = {
+      // if sortdirection is null, the sort field in redux should also be null
       field: nextSortDirection === null ? null : props.field,
       direction: nextSortDirection,
     };
 
+    // updates redux store with the new sortState
     dispatch(updateSort(sort));
   };
 

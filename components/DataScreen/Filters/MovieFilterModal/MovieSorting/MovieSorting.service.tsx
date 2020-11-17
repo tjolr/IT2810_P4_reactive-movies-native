@@ -5,6 +5,7 @@ export const sortByFields: string[] = MovieItemFields.filter(
   item => !item.hide && item.sortable
 ).map(item => item.field);
 
+// Returns correct icon name base on sort direction
 export const mapSortDirectionToIconName = (
   sortDirection: SortDirection
 ): string => {
@@ -18,6 +19,7 @@ export const mapSortDirectionToIconName = (
   }
 };
 
+// Returns field value that should be display on the button
 export const mapFieldNameToDisplayValue = (field: string): string => {
   switch (field) {
     case sortByFields[0]:

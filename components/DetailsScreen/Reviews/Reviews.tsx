@@ -16,6 +16,7 @@ interface ReviewsProps {
   movieId: string;
 }
 
+/* Component that is parent of all the reviews */
 const Reviews = ({ movieId }: ReviewsProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   const dispatch = useDispatch();
@@ -24,12 +25,15 @@ const Reviews = ({ movieId }: ReviewsProps) => {
     (state: RootStateOrAny) => state.reviewReducer.hasPendingChanges
   );
 
+  /* Query all reviews that is submitted to this movie 
+  refetch method to do one more refetch when needed */
   const { loading, error, data, refetch } = useQuery(MOVIE_REVIEW_QUERY, {
     variables: {
       movieId: movieId,
     },
   });
 
+  // Hook for refetching reviews when new reviews are added.
   useEffect(() => {
     hasPendingChangesRedux &&
       dispatch(setReviewHasPendingChanges(false)) &&

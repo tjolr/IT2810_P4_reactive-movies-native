@@ -32,8 +32,9 @@ const MovieList = () => {
     (state: RootStateOrAny) => state.movieReducer.searchIsLoading
   );
 
-  const { loading, error, data, refetch } = useQuery(buildMovieQuery(), {
+  const { loading, error, data } = useQuery(buildMovieQuery(), {
     variables: {
+      // if searchstring is undefined, rather pass an empty string
       searchString: searchStringRedux !== undefined ? searchStringRedux : '',
       page: pageRedux,
       filter: filterRedux,
@@ -44,9 +45,10 @@ const MovieList = () => {
   useEffect(() => {
     if (!loading && searchIsLoadingRedux) {
       // Stops showing loadingspinner in searchBar
-      // when data is found :-)
+      // when data is found
       dispatch(setSearchIsLoading(false));
     }
+    // If there is data, update totalrowcount
     data && dispatch(setTotalRowCount(data.Movie.totalRowCount));
   }, [data]);
 
@@ -65,6 +67,7 @@ const MovieList = () => {
       {data && data.Movie.movies.length > 0 ? (
         data.Movie.movies.map((row: IMovieListObject, index: number) => (
           <View
+            // Method child() is for using pseude-classes with EStyleSheet
             style={EStyleSheet.child(
               styles(theme),
               'movieListItemContainer',
@@ -84,6 +87,7 @@ const MovieList = () => {
 };
 
 const styles = (theme: IThemeObject) =>
+  // using pseudo-classes for styling even and odd movieItems differently
   EStyleSheet.create({
     'movieListItemContainer:nth-child-even': {
       backgroundColor: theme.colors.grey3,

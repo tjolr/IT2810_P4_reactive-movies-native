@@ -10,6 +10,8 @@ interface IUserfeedbackProps {
 
 type feedbackTypes = 'success' | 'error' | 'warning';
 
+/* Component for giving user feedback after user events */
+
 const Userfeedback = ({ message, type }: IUserfeedbackProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
 
@@ -32,10 +34,12 @@ const Userfeedback = ({ message, type }: IUserfeedbackProps) => {
     <View
       style={[
         styles.userFeedbackContainer,
+        /* get backgroundcolor dependent on feedback type */
         { backgroundColor: feedbackTypeInfo[type].backgroundColor },
       ]}
     >
       <Icon
+        /* Get icon based on feedback type */
         name={feedbackTypeInfo[type].iconName}
         containerStyle={{ margin: 5 }}
       />

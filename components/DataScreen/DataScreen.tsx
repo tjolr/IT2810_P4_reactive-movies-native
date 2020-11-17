@@ -9,6 +9,8 @@ import Filters from './Filters/Filters';
 import MovieList from './MovieList/MovieList';
 import Pagination from './Pagination/Pagination';
 
+// Screen which contains the movie list and all filter/sort/search/pagination features
+
 const DataScreen = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
 
@@ -16,12 +18,17 @@ const DataScreen = () => {
     <SafeAreaView style={styles(theme).container}>
       <StatusBar style="light" animated={true} />
 
+      {/* Contains searchbar and filters */}
       <View style={styles(theme).filterContainer}>
         <Filters />
       </View>
+
+      {/* Contains the movie list */}
       <View style={styles(theme).movieListContainer}>
         <MovieList />
       </View>
+
+      {/* Contains pagination section */}
       <View style={styles(theme).bottomContainer}>
         <Pagination />
       </View>

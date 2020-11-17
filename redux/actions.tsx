@@ -7,18 +7,15 @@ import {
   SET_SEARCH_IS_LOADING,
   SET_TOTAL_ROW_COUNT,
   HAS_PENDING_CHANGES,
+  MovieAction,
+  ReviewAction,
 } from './actionTypes';
 import { defaultSort, ISort, rowsPerPage } from './models/movieReducer.model';
 import store from './store';
 
-export interface Action {
-  type: string;
-  payload: any;
-}
-
 /* Actions for updating the movie queries */
 
-export const updateSearch = (content: string): Action => {
+export const updateSearch = (content: string): MovieAction => {
   // want to show the best matches for the search
   // therefore we dispatch action to set page to 1
   store.dispatch(changePage(1));
@@ -30,7 +27,7 @@ export const updateSearch = (content: string): Action => {
   };
 };
 
-export const changePage = (page: number): Action => {
+export const changePage = (page: number): MovieAction => {
   // The pageInterval shows which of total rows that are display
   let pageInterval = [(page - 1) * rowsPerPage + 1, page * rowsPerPage];
 
@@ -43,7 +40,7 @@ export const changePage = (page: number): Action => {
   };
 };
 
-export const updateReleaseYear = (content: number[]): Action => {
+export const updateReleaseYear = (content: number[]): MovieAction => {
   store.dispatch(changePage(1));
   return {
     type: UPDATE_RELEASE_YEAR,
@@ -53,7 +50,7 @@ export const updateReleaseYear = (content: number[]): Action => {
   };
 };
 
-export const updateRating = (content: number[]): Action => {
+export const updateRating = (content: number[]): MovieAction => {
   store.dispatch(changePage(1));
   return {
     type: UPDATE_RATING,
@@ -63,7 +60,7 @@ export const updateRating = (content: number[]): Action => {
   };
 };
 
-export const updateSort = (content: ISort): Action => {
+export const updateSort = (content: ISort): MovieAction => {
   store.dispatch(changePage(1));
   return {
     type: UPDATE_SORT,
@@ -76,14 +73,14 @@ export const updateSort = (content: ISort): Action => {
   };
 };
 
-export const setSearchIsLoading = (loading: boolean): Action => ({
+export const setSearchIsLoading = (loading: boolean): MovieAction => ({
   type: SET_SEARCH_IS_LOADING,
   payload: {
     loading,
   },
 });
 
-export const setTotalRowCount = (totalRowCount: number): Action => {
+export const setTotalRowCount = (totalRowCount: number): MovieAction => {
   const totalPages = Math.ceil(totalRowCount / rowsPerPage);
 
   return {
@@ -97,7 +94,7 @@ export const setTotalRowCount = (totalRowCount: number): Action => {
 
 export const setReviewHasPendingChanges = (
   hasPendingChanges: boolean
-): Action => {
+): ReviewAction => {
   return {
     type: HAS_PENDING_CHANGES,
     payload: {

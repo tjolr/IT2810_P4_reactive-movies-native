@@ -9,6 +9,7 @@ interface ReviewItemProps {
   text: string;
 }
 
+/* Review item that shows an review author and review text */
 const ReviewItem = ({ author, text }: ReviewItemProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
 

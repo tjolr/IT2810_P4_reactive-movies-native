@@ -29,7 +29,9 @@ const MovieFilters = () => {
       <Modal
         style={{ margin: 0 }}
         isVisible={showFilters}
+        // Hide modal if user press outside of modal (on backdrop)
         onBackdropPress={() => setShowFilters(false)}
+        // hide modal if user swipes the modal down
         onSwipeComplete={() => setShowFilters(false)}
         swipeDirection="down"
       >

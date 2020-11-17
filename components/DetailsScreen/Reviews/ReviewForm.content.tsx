@@ -1,17 +1,10 @@
 import { useMutation } from '@apollo/client';
 import React, { useContext, useState } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
-import {
-  Button,
-  Icon,
-  Text,
-  ThemeContext,
-  ThemeProps,
-} from 'react-native-elements';
+import { Button, Icon, ThemeContext, ThemeProps } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { ADD_REVIEW } from '../../../GraphQL/MutationBuilder';
 import { setReviewHasPendingChanges } from '../../../redux/actions';
-import { IThemeObject } from '../../../theme/theme.model';
 import Userfeedback from '../../Generic/Userfeedback';
 
 interface ReviewFormProps {
@@ -35,12 +28,15 @@ const ReviewFormContent = ({ movieId, toggleFormModal }: ReviewFormProps) => {
     setFormValues(defaultReviewState);
   };
 
+  // GraphQL mutation for adding reviews
   const [
     addReview,
     { loading: mutationLoading, error: mutationError },
   ] = useMutation(ADD_REVIEW, {
     onCompleted(data) {
+      // Backend returns true if successfull mutation
       if (data.addReview) {
+        // Set pending changes to store
         dispatch(setReviewHasPendingChanges(true));
         giveUserSuccessfulFeedback();
       }
@@ -114,11 +110,14 @@ const ReviewFormContent = ({ movieId, toggleFormModal }: ReviewFormProps) => {
         icon={<Icon name="send" style={{ marginLeft: 6 }} />}
         loading={mutationLoading}
         loadingProps={{ color: theme.colors.secondary }}
+        // Submit button should be disabled if mutation is loading,
+        // or if the textInput fields are empty
         disabled={mutationLoading || !formValues.author || !formValues.text}
         iconRight
         onPress={handleSubmit}
       />
 
+      {/* Give user feedback about the submit status */}
       {mutationError ? (
         <Userfeedback message="Error submitting your review" type="error" />
       ) : (

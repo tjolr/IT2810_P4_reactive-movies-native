@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { Bounce, Chase, Swing } from 'react-native-animated-spinkit';
 import { ThemeContext, ThemeProps } from 'react-native-elements';
 
+/* loading animations */
+
 export const LoadingAnimationBounce = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   return <Bounce size={250} color={theme.colors.primary} />;

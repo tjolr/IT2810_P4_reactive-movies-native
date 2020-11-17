@@ -17,12 +17,16 @@ const MovieListItem = (props: IMovieListItemProps) => {
   return (
     <TouchableOpacity
       style={styles.container}
+      // Go to detailpage of movieListItem when pressed
+      // passes movie properties as movieDetails
       onPress={() => navigation.navigate('Detail', { movieDetails: props.row })}
     >
       <View style={styles.movieInfoContainer}>
         <Text style={styles.title}>
           {props.row.title}
 
+          {/* Don't assume every movie have release_date in our db,
+        therefore we renders conditionally */}
           {props.row.release_date !== undefined && (
             <Text style={styles.release_date}>
               {' '}

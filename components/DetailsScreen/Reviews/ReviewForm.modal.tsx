@@ -22,6 +22,7 @@ const ReviewFormModal = ({ movieId }: ReviewFormModalProps) => {
 
   return (
     <View>
+      {/* Button to open the modal */}
       <Button
         onPress={toggleFormModal}
         icon={<Icon name="add-circle" />}
@@ -33,6 +34,7 @@ const ReviewFormModal = ({ movieId }: ReviewFormModalProps) => {
       <Modal
         style={{ margin: 0 }}
         isVisible={showForm}
+        /* Close modal if press on backdrop or swipedown */
         onBackdropPress={() => setShowForm(false)}
         onSwipeComplete={() => setShowForm(false)}
         swipeDirection="down"
@@ -40,6 +42,8 @@ const ReviewFormModal = ({ movieId }: ReviewFormModalProps) => {
         <View style={styles(theme).modalContainer}>
           <View style={styles(theme).modalHeader}>
             <Text h4>NEW REVIEW</Text>
+
+            {/* Close modal button */}
             <Button
               title="Close"
               type="outline"
@@ -50,6 +54,7 @@ const ReviewFormModal = ({ movieId }: ReviewFormModalProps) => {
               onPress={() => setShowForm(false)}
             />
           </View>
+          {/* Reviewform contains the input fields and submitbutton */}
           <ReviewFormContent
             movieId={movieId}
             toggleFormModal={toggleFormModal}

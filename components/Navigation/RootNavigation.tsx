@@ -8,6 +8,7 @@ import HomeScreen from '../HomeScreen/HomeScreen';
 
 const Stack = createStackNavigator();
 
+/* Navigation container for all the navigation in our app */
 const RootNavigation = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
 

@@ -1,14 +1,14 @@
-import React, {useState, useContext, useEffect} from 'react';
-import {StyleSheet} from 'react-native';
-import {SearchBar, ThemeProps} from 'react-native-elements';
-import {ThemeContext} from 'react-native-elements';
-import {RootStateOrAny, useDispatch, useSelector} from 'react-redux';
-import {IThemeObject} from '../../../../theme/theme.model';
-import {useDebounce} from 'use-debounce';
-import {updateSearch} from '../../../../redux/actions';
+import React, { useState, useContext, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
+import { SearchBar, ThemeProps } from 'react-native-elements';
+import { ThemeContext } from 'react-native-elements';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { IThemeObject } from '../../../../theme/theme.model';
+import { useDebounce } from 'use-debounce';
+import { updateSearch } from '../../../../redux/actions';
 
 const SearchField = () => {
-  const {theme} = useContext<ThemeProps<any>>(ThemeContext);
+  const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   const dispatch = useDispatch();
 
   const searchIsLoadingRedux = useSelector(
@@ -17,6 +17,8 @@ const SearchField = () => {
 
   const [searchFieldValue, setSearchFieldValue] = useState<string>('');
 
+  // Using debounce to prevent doing too many requests to backend.
+  // When user types, a request will be sent after 200ms
   const [debouncedSearchTerm] = useDebounce(searchFieldValue, 200);
 
   const updateSearchFieldValue = (searchValue: string) => {
@@ -56,4 +58,5 @@ const styles = (theme: IThemeObject) =>
       color: 'white',
     },
   });
+
 export default SearchField;

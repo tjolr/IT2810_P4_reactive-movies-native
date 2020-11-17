@@ -6,6 +6,7 @@ import {
   UPDATE_SORT,
   SET_SEARCH_IS_LOADING,
   SET_TOTAL_ROW_COUNT,
+  MovieAction,
 } from '../actionTypes';
 import { IMovieState } from '../models/movieReducer.model';
 
@@ -36,16 +37,14 @@ export const initMovieState: IMovieState = {
   searchIsLoading: false,
 };
 
-/* Movie Reducer
-Many times when filters, sorts or search is changed the user wants to 
-see the best results for its search. Therefore many times the page is 
-set to the first page. */
-const movieReducer = (state = initMovieState, action: any) => {
+/* Movie Reducer */
+const movieReducer = (state = initMovieState, action: MovieAction) => {
   switch (action.type) {
     case UPDATE_SEARCH_FIELD:
       return {
         ...state,
         searchString: action.payload.content,
+        // set search is loading if searchstring is not empty
         searchIsLoading: action.payload.content ? true : false,
       };
     case CHANGE_PAGE:

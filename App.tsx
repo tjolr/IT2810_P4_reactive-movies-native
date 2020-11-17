@@ -13,7 +13,9 @@ import RootNavigation from './components/Navigation/RootNavigation';
 // Needs to trigger this to use the ExtendedStylesheet
 EStyleSheet.build({});
 
+/* Root component.  */
 const App = () => {
+  /* Provides graphQL client, redux store and theme */
   return (
     <ApolloProvider client={client}>
       <StoreProvider store={store}>
