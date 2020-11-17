@@ -13,6 +13,7 @@ export const MovieItemFields: IMovieItemField[] = [
 ];
 
 export const MovieItemDetailFields: IMovieItemField[] = [
+  { field: '_id' },
   { field: 'runtime' },
   { field: 'vote_count' },
   { field: 'overview' },

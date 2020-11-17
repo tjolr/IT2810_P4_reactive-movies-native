@@ -43,10 +43,25 @@ const DetailsScreen = ({ route }: IDetailScreenProps) => {
       </View>
     );
 
-  const movieDetailsExtended: IMovieListObject = data && {
+  let movieDetailsExtended: IMovieListObject = {
     ...movieDetails,
-    ...data.Movie.movies[0],
   };
+
+  if (data.Movie.movies.length > 1) {
+    data.Movie.movies.map((movie: IMovieListObject) => {
+      if (movie._id === movieDetails._id) {
+        movieDetailsExtended = {
+          ...movieDetailsExtended,
+          ...movie,
+        };
+      }
+    });
+  } else {
+    movieDetailsExtended = {
+      ...movieDetailsExtended,
+      ...data.Movie.movies[0],
+    };
+  }
 
   return (
     <ScrollView style={styles(theme).container}>
