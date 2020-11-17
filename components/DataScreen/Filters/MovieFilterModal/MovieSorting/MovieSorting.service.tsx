@@ -2,7 +2,7 @@ import { SortDirection } from '../../../../../redux/models/movieReducer.model';
 import { MovieItemFields } from '../../../MovieList/models/movieItem.model';
 
 export const sortByFields: string[] = MovieItemFields.filter(
-  item => !item.hide
+  item => !item.hide && item.sortable
 ).map(item => item.field);
 
 export const mapSortDirectionToIconName = (
