@@ -16,7 +16,11 @@ import {
   mapSortDirectionToIconName,
 } from './MovieSorting.service';
 
-export const SortButton = (props: any) => {
+interface SortButtonProps {
+  field: string;
+}
+
+export const SortButton = (props: SortButtonProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   const dispatch = useDispatch();
   const sortFieldRedux = useSelector(

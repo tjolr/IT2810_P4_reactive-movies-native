@@ -15,6 +15,7 @@ const Description = (props: IDescriptionProps) => {
     <View style={styles.container}>
       <Text style={{ fontStyle: 'italic' }}>{props.tagline}</Text>
       <View style={styles.genreContainer}>
+        {/* If there are genres, map them out with <GenreTag> */}
         {props.genres.length > 0 ? (
           props.genres.map((genre: IGenre, index: number) => (
             <View style={styles.genre} key={index}>

@@ -14,6 +14,7 @@ export interface ITitleBarProps {
 }
 
 const TitleBar = (props: ITitleBarProps) => {
+  // Creating prop objects for sending data to child component
   const UserRatingProp: IUserRatingProps = {
     vote_average: props.vote_average,
     vote_count: props.vote_count,
@@ -22,6 +23,7 @@ const TitleBar = (props: ITitleBarProps) => {
   return (
     <View style={styles.container}>
       <View style={{ flex: 3 }}>
+        {/* If the title is long, use smaller text size */}
         {props.title.length < 13 ? (
           <Text h1>{props.title}</Text>
         ) : props.title.length < 16 ? (
@@ -33,6 +35,7 @@ const TitleBar = (props: ITitleBarProps) => {
         )}
         <Text>
           {getFullYearNumber(props.release_date)}
+          {/* Unicode dot */}
           {'  \u2022  '}
           {minutesToHourString(props.runtime)}
         </Text>

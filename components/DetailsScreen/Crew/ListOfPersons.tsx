@@ -9,19 +9,19 @@ export interface IListOfPersonsProps {
 }
 
 const ListOfPersons = (props: IListOfPersonsProps) => {
+  // component for showing a list of people with correct typing
+  // ex1: Person1
+  // ex2: Person1 and Person 2
+  // ex3: Person1, Person2 and Person3
+  // with a title that shows an extra s if there are multiple persons
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>
         {props.title}
-        {/* an extra 's' if there are multiple */}
         {props.persons.length > 1 && <Text style={styles.titleText}>s</Text>}
       </Text>
       {props.persons.length > 0 ? (
         <View style={{ flexDirection: 'row' }}>
-          {/* Checking index to get correct typing of the list
-            e.g. Person1
-            e.g. Person1 and Person 2
-            e.g. Person1, Person2 and Person3 */}
           {props.persons.map((person: ICrew, index: number) =>
             index == 0 ? (
               <Text key={index}>{person.name}</Text>

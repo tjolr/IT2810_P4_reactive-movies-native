@@ -15,15 +15,18 @@ export const RatingSlider = () => {
     (state: RootStateOrAny) => state.movieReducer.filter.rating
   );
 
+  // Get initial values from redux store
   const [ratingFilterValue, setRatingFilterValue] = useState<number[]>([
     ratingFilterValuesRedux.from,
     ratingFilterValuesRedux.to,
   ]);
 
+  // cb function for every change in the filter value
   const ratingFilterValueChange = (values: number[]) => {
     setRatingFilterValue(values);
   };
 
+  // cb function for when you lift up finger at a value
   const ratingFilterValueChangeFinished = (values: number[]) => {
     dispatch(updateRating(values));
   };
@@ -51,20 +54,23 @@ export const RatingSlider = () => {
 
 export const ReleaseYearSlider = () => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
-
   const dispatch = useDispatch();
+
   const releaseYearFilterValuesRedux = useSelector(
     (state: RootStateOrAny) => state.movieReducer.filter.release_year
   );
 
+  // Get initial values from redux store
   const [releaseYearFilterValue, setReleaseYearFilterValue] = useState<
     number[]
   >([releaseYearFilterValuesRedux.from, releaseYearFilterValuesRedux.to]);
 
+  // cb function for every change in the filter value
   const releaseYearFilterValueChange = (values: number[]) => {
     setReleaseYearFilterValue(values);
   };
 
+  // cb function for when you lift up finger at a value
   const releaseYearFilterValueChangeFinished = (values: number[]) => {
     dispatch(updateReleaseYear(values));
   };

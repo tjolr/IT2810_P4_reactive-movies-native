@@ -1,10 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ImageBackground, View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const HomeScreen = ({ navigation }: any) => {
+const HomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <ImageBackground

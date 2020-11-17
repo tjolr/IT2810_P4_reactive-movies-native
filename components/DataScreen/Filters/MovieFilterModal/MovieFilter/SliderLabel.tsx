@@ -1,6 +1,6 @@
 import { LabelProps } from '@ptomasroos/react-native-multi-slider';
 import React, { useContext } from 'react';
-import { View, StyleSheet, useWindowDimensions } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { ThemeContext, ThemeProps, Text } from 'react-native-elements';
 import { IThemeObject } from '../../../../../theme/theme.model';
 
@@ -8,11 +8,11 @@ const width = 40;
 
 export const CustomLabel = (props: LabelProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
-  const windowWidth = useWindowDimensions().width;
 
   let oneMarkerVal = props.oneMarkerValue;
   let twoMarkerVal = props.twoMarkerValue;
 
+  // Use one decimal if the rating is not 10
   if (props.oneMarkerValue < 10) {
     oneMarkerVal = Number(props.oneMarkerValue).toFixed(1);
   }
@@ -27,13 +27,7 @@ export const CustomLabel = (props: LabelProps) => {
         <Text style={styles(theme).sliderLabelText}>{oneMarkerVal}</Text>
       </View>
       {/* Right slider label */}
-      <View
-        style={[
-          styles(theme).sliderLabel,
-          // 15 is because of the padding in the MovieFilter modal
-          { left: windowWidth - (width + 15 * 2) },
-        ]}
-      >
+      <View style={[styles(theme).sliderLabel, { right: 0 }]}>
         <Text style={styles(theme).sliderLabelText}>{twoMarkerVal}</Text>
       </View>
     </View>

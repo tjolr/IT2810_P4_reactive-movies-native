@@ -11,7 +11,7 @@ const Crew = (props: ICrewProps) => {
   let directors: ICrew[] = [];
   let writers: ICrew[] = [];
 
-  // add the writers and directors to their lists
+  // go through the crew, and add the writers and the directors to their lists
   if (props.crew) {
     props.crew.map((crewMember: ICrew) => {
       if (crewMember.job) {

@@ -21,6 +21,7 @@ const DetailsScreen = ({ route }: IDetailScreenProps) => {
   const { theme } = useContext<ThemeProps<any>>(ThemeContext);
   const { movieDetails } = route.params;
 
+  // Creating prop objects for sending data to child components
   const TitleBarProp: ITitleBarProps = {
     title: movieDetails.title,
     release_date: movieDetails.release_date,
